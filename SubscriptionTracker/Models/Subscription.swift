@@ -1,5 +1,6 @@
 import Foundation
 import SwiftData
+import SwiftUI
 
 enum BillingCycle: String, Codable, CaseIterable {
     case weekly = "Weekly"
@@ -23,6 +24,17 @@ enum SubscriptionCategory: String, Codable, CaseIterable {
         case .news: "newspaper.fill"
         case .gaming: "gamecontroller.fill"
         case .other: "square.grid.2x2.fill"
+        }
+    }
+
+    var color: Color {
+        switch self {
+        case .streaming: .purple
+        case .software: .blue
+        case .fitness: .green
+        case .news: .orange
+        case .gaming: .red
+        case .other: .gray
         }
     }
 }

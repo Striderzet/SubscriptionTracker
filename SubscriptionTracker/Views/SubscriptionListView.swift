@@ -4,12 +4,9 @@ import SwiftData
 struct SubscriptionListView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Subscription.nextRenewal) private var subscriptions: [Subscription]
+    @State private var viewModel = SubscriptionListViewModel()
     @State private var showingAddSheet = false
     @State private var editingSubscription: Subscription?
-
-    private var active: [Subscription] { subscriptions.filter(\.isActive) }
-    private var inactive: [Subscription] { subscriptions.filter { !$0.isActive } }
-    private var monthlyTotal: Double { active.reduce(0) { $0 + $1.monthlyEquivalent } }
 
     var body: some View {
         NavigationStack {
@@ -21,7 +18,7 @@ struct SubscriptionListView: View {
                                 Text("Monthly Total")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                Text(monthlyTotal, format: .currency(code: "USD"))
+                                Text(viewModel.monthlyTotal(in: subscriptions), format: .currency(code: "USD"))
                                     .font(.title2.bold())
                             }
                             Spacer()
@@ -29,7 +26,7 @@ struct SubscriptionListView: View {
                                 Text("Annual")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                Text(monthlyTotal * 12, format: .currency(code: "USD"))
+                                Text(viewModel.monthlyTotal(in: subscriptions) * 12, format: .currency(code: "USD"))
                                     .font(.title3)
                                     .foregroundStyle(.secondary)
                             }
@@ -38,25 +35,28 @@ struct SubscriptionListView: View {
                     }
                 }
 
+                let active = viewModel.active(in: subscriptions)
+                let inactive = viewModel.inactive(in: subscriptions)
+
                 if !active.isEmpty {
-                    Section("Active") {
+                    Section(SubscriptionListViewModel.sectionActive) {
                         ForEach(active) { sub in
-                            SubscriptionRow(subscription: sub)
+                            SubscriptionRow(subscription: sub, viewModel: viewModel)
                                 .contentShape(Rectangle())
                                 .onTapGesture { editingSubscription = sub }
                         }
-                        .onDelete { offsets in delete(from: active, at: offsets) }
+                        .onDelete { offsets in viewModel.delete(from: active, at: offsets, context: modelContext) }
                     }
                 }
 
                 if !inactive.isEmpty {
-                    Section("Inactive") {
+                    Section(SubscriptionListViewModel.sectionInactive) {
                         ForEach(inactive) { sub in
-                            SubscriptionRow(subscription: sub)
+                            SubscriptionRow(subscription: sub, viewModel: viewModel)
                                 .contentShape(Rectangle())
                                 .onTapGesture { editingSubscription = sub }
                         }
-                        .onDelete { offsets in delete(from: inactive, at: offsets) }
+                        .onDelete { offsets in viewModel.delete(from: inactive, at: offsets, context: modelContext) }
                     }
                 }
             }
@@ -69,9 +69,9 @@ struct SubscriptionListView: View {
             .overlay {
                 if subscriptions.isEmpty {
                     ContentUnavailableView(
-                        "No Subscriptions",
-                        systemImage: "creditcard.fill",
-                        description: Text("Tap + to track your first subscription.")
+                        SubscriptionListViewModel.emptyStateTitle,
+                        systemImage: SubscriptionListViewModel.emptyStateIcon,
+                        description: Text(SubscriptionListViewModel.emptyStateDescription)
                     )
                 }
             }
@@ -83,14 +83,11 @@ struct SubscriptionListView: View {
             }
         }
     }
-
-    private func delete(from list: [Subscription], at offsets: IndexSet) {
-        offsets.forEach { modelContext.delete(list[$0]) }
-    }
 }
 
 struct SubscriptionRow: View {
     let subscription: Subscription
+    let viewModel: SubscriptionListViewModel
 
     var body: some View {
         HStack(spacing: 12) {
@@ -115,30 +112,13 @@ struct SubscriptionRow: View {
 
             VStack(alignment: .trailing, spacing: 2) {
                 Text(subscription.amount, format: .currency(code: "USD")).font(.headline)
-                Text(renewalText(for: subscription))
+                Text(viewModel.renewalText(for: subscription))
                     .font(.caption)
-                    .foregroundStyle(renewalColor(for: subscription))
+                    .foregroundStyle(viewModel.renewalColor(for: subscription))
             }
         }
-        .padding(.vertical, 2)
+        .padding(.vertical, SubscriptionListViewModel.rowVerticalPadding)
         .opacity(subscription.isActive ? 1.0 : 0.5)
-    }
-
-    private func renewalText(for sub: Subscription) -> String {
-        switch sub.daysUntilRenewal {
-        case ..<0: return "Overdue"
-        case 0: return "Today"
-        case 1: return "Tomorrow"
-        default: return "in \(sub.daysUntilRenewal)d"
-        }
-    }
-
-    private func renewalColor(for sub: Subscription) -> Color {
-        switch sub.daysUntilRenewal {
-        case ..<1: return .red
-        case 1...3: return .orange
-        default: return .secondary
-        }
     }
 }
 
@@ -147,21 +127,10 @@ struct CategoryBadge: View {
 
     var body: some View {
         Image(systemName: category.icon)
-            .font(.system(size: 16, weight: .semibold))
+            .font(.system(size: SubscriptionListViewModel.badgeIconSize, weight: .semibold))
             .foregroundStyle(.white)
-            .frame(width: 40, height: 40)
-            .background(color(for: category))
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-    }
-
-    private func color(for category: SubscriptionCategory) -> Color {
-        switch category {
-        case .streaming: .purple
-        case .software: .blue
-        case .fitness: .green
-        case .news: .orange
-        case .gaming: .red
-        case .other: .gray
-        }
+            .frame(width: SubscriptionListViewModel.badgeSize, height: SubscriptionListViewModel.badgeSize)
+            .background(category.color)
+            .clipShape(RoundedRectangle(cornerRadius: SubscriptionListViewModel.badgeCornerRadius))
     }
 }

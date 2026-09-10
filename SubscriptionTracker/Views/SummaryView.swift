@@ -4,51 +4,36 @@ import Charts
 
 struct SummaryView: View {
     @Query private var subscriptions: [Subscription]
-
-    private var active: [Subscription] { subscriptions.filter(\.isActive) }
-
-    private var monthlyTotal: Double {
-        active.reduce(0) { $0 + $1.monthlyEquivalent }
-    }
-
-    private var categoryData: [(category: SubscriptionCategory, total: Double)] {
-        Dictionary(grouping: active, by: \.category)
-            .map { (category: $0.key, total: $0.value.reduce(0) { $0 + $1.monthlyEquivalent }) }
-            .sorted { $0.total > $1.total }
-    }
-
-    private var upcomingRenewals: [Subscription] {
-        active
-            .filter { $0.daysUntilRenewal >= 0 && $0.daysUntilRenewal <= 30 }
-            .sorted { $0.daysUntilRenewal < $1.daysUntilRenewal }
-    }
+    @State private var viewModel = SummaryViewModel()
 
     var body: some View {
         NavigationStack {
             List {
+                let monthly = viewModel.monthlyTotal(in: subscriptions)
                 Section {
                     HStack(spacing: 0) {
-                        StatTile(label: "Monthly", amount: monthlyTotal)
+                        StatTile(label: "Monthly", amount: monthly)
                         Divider().padding(.vertical, 8)
-                        StatTile(label: "Annual", amount: monthlyTotal * 12)
+                        StatTile(label: "Annual", amount: monthly * 12)
                     }
                 }
 
-                if !categoryData.isEmpty {
-                    Section("Spending by Category") {
-                        Chart(categoryData, id: \.category) { item in
+                let categories = viewModel.categoryData(in: subscriptions)
+                if !categories.isEmpty {
+                    Section(SummaryViewModel.sectionCategory) {
+                        Chart(categories, id: \.category) { item in
                             SectorMark(
                                 angle: .value("Amount", item.total),
-                                innerRadius: .ratio(0.6),
-                                angularInset: 1.5
+                                innerRadius: .ratio(SummaryViewModel.chartInnerRadiusRatio),
+                                angularInset: SummaryViewModel.chartAngularInset
                             )
-                            .cornerRadius(4)
+                            .cornerRadius(SummaryViewModel.chartCornerRadius)
                             .foregroundStyle(by: .value("Category", item.category.rawValue))
                         }
-                        .frame(height: 200)
+                        .frame(height: SummaryViewModel.chartHeight)
                         .padding(.vertical, 8)
 
-                        ForEach(categoryData, id: \.category) { item in
+                        ForEach(categories, id: \.category) { item in
                             HStack {
                                 Image(systemName: item.category.icon)
                                     .foregroundStyle(.secondary)
@@ -65,9 +50,10 @@ struct SummaryView: View {
                     }
                 }
 
-                if !upcomingRenewals.isEmpty {
-                    Section("Renewing in 30 Days") {
-                        ForEach(upcomingRenewals) { sub in
+                let upcoming = viewModel.upcomingRenewals(in: subscriptions)
+                if !upcoming.isEmpty {
+                    Section(SummaryViewModel.sectionUpcoming) {
+                        ForEach(upcoming) { sub in
                             HStack(spacing: 12) {
                                 CategoryBadge(category: sub.category)
                                 VStack(alignment: .leading, spacing: 2) {
@@ -79,9 +65,9 @@ struct SummaryView: View {
                                 Spacer()
                                 VStack(alignment: .trailing, spacing: 2) {
                                     Text(sub.amount, format: .currency(code: "USD"))
-                                    Text(sub.daysUntilRenewal == 0 ? "Today" : "in \(sub.daysUntilRenewal)d")
+                                    Text(viewModel.renewalLabel(for: sub))
                                         .font(.caption)
-                                        .foregroundStyle(sub.daysUntilRenewal <= 3 ? .red : .secondary)
+                                        .foregroundStyle(viewModel.isUrgent(sub) ? .red : .secondary)
                                 }
                             }
                         }
@@ -92,9 +78,9 @@ struct SummaryView: View {
             .overlay {
                 if subscriptions.isEmpty {
                     ContentUnavailableView(
-                        "No Data Yet",
-                        systemImage: "chart.pie.fill",
-                        description: Text("Add subscriptions to see your spending summary.")
+                        SummaryViewModel.emptyStateTitle,
+                        systemImage: SummaryViewModel.emptyStateIcon,
+                        description: Text(SummaryViewModel.emptyStateDescription)
                     )
                 }
             }
