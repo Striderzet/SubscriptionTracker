@@ -8,8 +8,28 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - Protocol (ISP / DIP)
+
+protocol SummaryViewModelProtocol: AnyObject {
+    func monthlyTotal(in subscriptions: [Subscription]) -> Double
+    func annualTotal(in subscriptions: [Subscription]) -> Double
+    func categoryData(in subscriptions: [Subscription]) -> [(category: SubscriptionCategory, total: Double)]
+    func upcomingRenewals(in subscriptions: [Subscription]) -> [Subscription]
+    func renewalLabel(for subscription: Subscription) -> String
+    func isUrgent(_ subscription: Subscription) -> Bool
+}
+
+// MARK: - Implementation
+
 @Observable
-final class SummaryViewModel {
+final class SummaryViewModel: SummaryViewModelProtocol {
+
+    // MARK: - Dependencies (DIP)
+    private let service: any SubscriptionServicing
+
+    init(service: any SubscriptionServicing = SubscriptionService()) {
+        self.service = service
+    }
 
     // MARK: - Chart Constants
     static let chartHeight: CGFloat = 200
@@ -23,18 +43,17 @@ final class SummaryViewModel {
     static let rowSpacing: CGFloat = 12
     static let rowTextSpacing: CGFloat = 2
     static let tileVerticalPadding: CGFloat = 4
+    static let tileDividerSpacing: CGFloat = 0
 
     // MARK: - Renewal Constants
     static let upcomingWindowDays = 30
     static let urgentRenewalThreshold = 3
-    static let monthsPerYear: Double = 12.0
 
     // MARK: - Icons
     static let tabIcon = "chart.pie.fill"
 
     // MARK: - Format
     static let currencyCode = "USD"
-    static let tileDividerSpacing: CGFloat = 0
 
     // MARK: - Strings
     static let navigationTitle: LocalizedStringKey = "summary.navigation.title"
@@ -51,32 +70,26 @@ final class SummaryViewModel {
     static var chartLabelAmount: String { String(localized: "chart.label.amount") }
     static var chartLabelCategory: String { String(localized: "chart.label.category") }
 
-    // MARK: - Data
-    func active(in subscriptions: [Subscription]) -> [Subscription] {
-        subscriptions.filter(\.isActive)
+    // MARK: - Data (delegated to service — SRP)
+    func monthlyTotal(in subscriptions: [Subscription]) -> Double {
+        service.monthlyTotal(in: subscriptions)
     }
 
-    func monthlyTotal(in subscriptions: [Subscription]) -> Double {
-        active(in: subscriptions).reduce(0) { $0 + $1.monthlyEquivalent }
+    func annualTotal(in subscriptions: [Subscription]) -> Double {
+        service.annualTotal(in: subscriptions)
     }
 
     func categoryData(in subscriptions: [Subscription]) -> [(category: SubscriptionCategory, total: Double)] {
-        Dictionary(grouping: active(in: subscriptions), by: \.category)
-            .map { (category: $0.key, total: $0.value.reduce(0) { $0 + $1.monthlyEquivalent }) }
-            .sorted { $0.total > $1.total }
+        service.categoryData(in: subscriptions)
     }
 
     func upcomingRenewals(in subscriptions: [Subscription]) -> [Subscription] {
-        active(in: subscriptions)
-            .filter { $0.daysUntilRenewal >= 0 && $0.daysUntilRenewal <= Self.upcomingWindowDays }
-            .sorted { $0.daysUntilRenewal < $1.daysUntilRenewal }
+        service.upcomingRenewals(in: subscriptions, windowDays: Self.upcomingWindowDays)
     }
 
-    // MARK: - Formatting
+    // MARK: - Formatting (delegated to service — SRP)
     func renewalLabel(for subscription: Subscription) -> String {
-        subscription.daysUntilRenewal == 0
-            ? String(localized: "renewal.today")
-            : String(format: NSLocalizedString("renewal.in_days", comment: ""), subscription.daysUntilRenewal)
+        service.renewalText(for: subscription)
     }
 
     func isUrgent(_ subscription: Subscription) -> Bool {

@@ -8,8 +8,30 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - Protocol (ISP / DIP)
+
+protocol SubscriptionListViewModelProtocol: AnyObject {
+    func active(in subscriptions: [Subscription]) -> [Subscription]
+    func inactive(in subscriptions: [Subscription]) -> [Subscription]
+    func monthlyTotal(in subscriptions: [Subscription]) -> Double
+    func annualTotal(in subscriptions: [Subscription]) -> Double
+    func delete(from list: [Subscription], at offsets: IndexSet, context: ModelContext)
+    func renewalText(for subscription: Subscription) -> String
+    func renewalColor(for subscription: Subscription) -> Color
+    func maskedCard(lastFour: String) -> String
+}
+
+// MARK: - Implementation
+
 @Observable
-final class SubscriptionListViewModel {
+final class SubscriptionListViewModel: SubscriptionListViewModelProtocol {
+
+    // MARK: - Dependencies (DIP)
+    private let service: any SubscriptionServicing
+
+    init(service: any SubscriptionServicing = SubscriptionService()) {
+        self.service = service
+    }
 
     // MARK: - Layout Constants
     static let badgeSize: CGFloat = 40
@@ -48,46 +70,41 @@ final class SubscriptionListViewModel {
     static let sectionActive: LocalizedStringKey = "list.section.active"
     static let sectionInactive: LocalizedStringKey = "list.section.inactive"
 
-    // MARK: - Data
+    // MARK: - Data (delegated to service — SRP)
     func active(in subscriptions: [Subscription]) -> [Subscription] {
-        subscriptions.filter(\.isActive)
+        service.active(in: subscriptions)
     }
 
     func inactive(in subscriptions: [Subscription]) -> [Subscription] {
-        subscriptions.filter { !$0.isActive }
+        service.inactive(in: subscriptions)
     }
 
     func monthlyTotal(in subscriptions: [Subscription]) -> Double {
-        active(in: subscriptions).reduce(0) { $0 + $1.monthlyEquivalent }
+        service.monthlyTotal(in: subscriptions)
     }
 
     func annualTotal(in subscriptions: [Subscription]) -> Double {
-        monthlyTotal(in: subscriptions) * 12.0
+        service.annualTotal(in: subscriptions)
     }
 
     func delete(from list: [Subscription], at offsets: IndexSet, context: ModelContext) {
-        offsets.forEach { context.delete(list[$0]) }
+        service.delete(from: list, at: offsets, context: context)
     }
 
-    // MARK: - Formatting
+    // MARK: - Formatting (delegated to service — SRP)
     func renewalText(for subscription: Subscription) -> String {
-        switch subscription.daysUntilRenewal {
-        case ..<0: return String(localized: "renewal.overdue")
-        case 0:    return String(localized: "renewal.today")
-        case 1:    return String(localized: "renewal.tomorrow")
-        default:   return String(format: NSLocalizedString("renewal.in_days", comment: ""), subscription.daysUntilRenewal)
-        }
+        service.renewalText(for: subscription)
     }
 
     func renewalColor(for subscription: Subscription) -> Color {
-        switch subscription.daysUntilRenewal {
-        case ..<Self.urgentDayThreshold:                          return .red
-        case Self.urgentDayThreshold...Self.warningDayThreshold:  return .orange
-        default:                                                   return .secondary
-        }
+        service.renewalColor(
+            for: subscription,
+            urgentThreshold: Self.urgentDayThreshold,
+            warningThreshold: Self.warningDayThreshold
+        )
     }
 
     func maskedCard(lastFour: String) -> String {
-        "···· \(lastFour)"
+        service.maskedCard(lastFour: lastFour)
     }
 }

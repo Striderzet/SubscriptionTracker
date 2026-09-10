@@ -18,6 +18,7 @@
 		AABBAABBAABBAABBAABB0033 /* AddEditSubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0032 /* AddEditSubscriptionViewModel.swift */; };
 		AABBAABBAABBAABBAABB0035 /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0034 /* SummaryViewModel.swift */; };
 		AABBAABBAABBAABBAABB0042 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0041 /* Localizable.strings */; };
+		AABBAABBAABBAABBAABB0051 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0050 /* SubscriptionService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		AABBAABBAABBAABBAABB0032 /* AddEditSubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditSubscriptionViewModel.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0034 /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0040 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB0050 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXVariantGroup section */
@@ -72,11 +74,20 @@
 				AABBAABBAABBAABBAABB000E /* Models */,
 				AABBAABBAABBAABBAABB000F /* Views */,
 				AABBAABBAABBAABBAABB0036 /* ViewModels */,
+				AABBAABBAABBAABBAABB0052 /* Services */,
 				AABBAABBAABBAABBAABB0041 /* Localizable.strings */,
 				AABBAABBAABBAABBAABB0018 /* Assets.xcassets */,
 				AABBAABBAABBAABBAABB0011 /* Preview Content */,
 			);
 			path = SubscriptionTracker;
+			sourceTree = "<group>";
+		};
+		AABBAABBAABBAABBAABB0052 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AABBAABBAABBAABBAABB0050 /* SubscriptionService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		AABBAABBAABBAABBAABB000E /* Models */ = {
@@ -202,6 +213,7 @@
 				AABBAABBAABBAABBAABB0031 /* SubscriptionListViewModel.swift in Sources */,
 				AABBAABBAABBAABBAABB0033 /* AddEditSubscriptionViewModel.swift in Sources */,
 				AABBAABBAABBAABBAABB0035 /* SummaryViewModel.swift in Sources */,
+				AABBAABBAABBAABBAABB0051 /* SubscriptionService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,18 @@ enum BillingCycle: String, Codable, CaseIterable {
     case monthly = "Monthly"
     case annual = "Annual"
 
+    // MARK: - Conversion Constants (OCP — single source of truth for all billing math)
+    static let weeksPerMonth: Double = 4.33
+    static let monthsPerYear: Double = 12.0
+
+    func monthlyEquivalent(for amount: Double) -> Double {
+        switch self {
+        case .weekly:  amount * BillingCycle.weeksPerMonth
+        case .monthly: amount
+        case .annual:  amount / BillingCycle.monthsPerYear
+        }
+    }
+
     var localizedName: String {
         switch self {
         case .weekly:  NSLocalizedString("billing.weekly", comment: "")
@@ -98,13 +110,7 @@ final class Subscription {
         self.createdAt = Date()
     }
 
-    var monthlyEquivalent: Double {
-        switch billingCycle {
-        case .weekly: amount * 4.33
-        case .monthly: amount
-        case .annual: amount / 12.0
-        }
-    }
+    var monthlyEquivalent: Double { billingCycle.monthlyEquivalent(for: amount) }
 
     var daysUntilRenewal: Int {
         let today = Calendar.current.startOfDay(for: Date())

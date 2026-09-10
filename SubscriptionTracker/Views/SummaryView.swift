@@ -21,7 +21,7 @@ struct SummaryView: View {
                     HStack(spacing: SummaryViewModel.tileDividerSpacing) {
                         StatTile(label: SummaryViewModel.labelMonthly, amount: monthly)
                         Divider().padding(.vertical, SummaryViewModel.tileVerticalPadding)
-                        StatTile(label: SummaryViewModel.labelAnnual, amount: monthly * SummaryViewModel.monthsPerYear)
+                        StatTile(label: SummaryViewModel.labelAnnual, amount: viewModel.annualTotal(in: subscriptions))
                     }
                 }
 

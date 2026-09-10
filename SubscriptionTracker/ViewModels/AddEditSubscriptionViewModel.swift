@@ -8,15 +8,33 @@
 import SwiftUI
 import SwiftData
 
+// MARK: - Protocol (ISP / DIP)
+
+protocol AddEditSubscriptionViewModelProtocol: AnyObject {
+    var name: String { get set }
+    var merchant: String { get set }
+    var amountText: String { get set }
+    var billingCycle: BillingCycle { get set }
+    var nextRenewal: Date { get set }
+    var category: SubscriptionCategory { get set }
+    var cardLastFour: String { get set }
+    var isActive: Bool { get set }
+    var isValid: Bool { get }
+    var monthlyPreview: Double? { get }
+    var annualPreview: Double? { get }
+    func populate(from subscription: Subscription)
+    func save(editing subscription: Subscription?, context: ModelContext)
+}
+
+// MARK: - Implementation
+
 @Observable
-final class AddEditSubscriptionViewModel {
+final class AddEditSubscriptionViewModel: AddEditSubscriptionViewModelProtocol {
 
     // MARK: - Layout Constants
     static let cardDigitsFieldWidth: CGFloat = 60
 
     // MARK: - Business Constants
-    static let weeksPerMonth: Double = 4.33
-    static let monthsPerYear: Double = 12.0
     static let maxCardDigits = 4
     static let amountFormat = "%.2f"
     static let currencyCode = "USD"
@@ -62,13 +80,14 @@ final class AddEditSubscriptionViewModel {
 
     var isValid: Bool { !name.isEmpty && !merchant.isEmpty && parsedAmount != nil }
 
+    // Delegates to BillingCycle — OCP: adding a new cycle only requires updating BillingCycle
     var monthlyPreview: Double? {
         guard let amount = parsedAmount else { return nil }
-        return switch billingCycle {
-        case .monthly: amount
-        case .annual:  amount / Self.monthsPerYear
-        case .weekly:  amount * Self.weeksPerMonth
-        }
+        return billingCycle.monthlyEquivalent(for: amount)
+    }
+
+    var annualPreview: Double? {
+        monthlyPreview.map { $0 * BillingCycle.monthsPerYear }
     }
 
     // MARK: - Methods
