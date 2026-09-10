@@ -1,0 +1,21 @@
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+
+# DerivedData
+DerivedData/
+
+# Build products
+build/
+
+# Packages
+.build/
+*.resolved
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# macOS
+.DS_Store
