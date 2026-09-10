@@ -14,9 +14,9 @@ struct SubscriptionTrackerApp: App {
         WindowGroup {
             TabView {
                 SubscriptionListView()
-                    .tabItem { Label("Subscriptions", systemImage: "creditcard.fill") }
+                    .tabItem { Label(SubscriptionListViewModel.navigationTitle, systemImage: SubscriptionListViewModel.tabIcon) }
                 SummaryView()
-                    .tabItem { Label("Summary", systemImage: "chart.pie.fill") }
+                    .tabItem { Label(SummaryViewModel.navigationTitle, systemImage: SummaryViewModel.tabIcon) }
             }
         }
         .modelContainer(for: Subscription.self)

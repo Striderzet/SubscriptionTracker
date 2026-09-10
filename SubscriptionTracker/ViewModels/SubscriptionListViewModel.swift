@@ -26,6 +26,17 @@ final class SubscriptionListViewModel {
     static let urgentDayThreshold = 1
     static let warningDayThreshold = 3
 
+    // MARK: - Opacity
+    static let activeOpacity: Double = 1.0
+    static let inactiveOpacity: Double = 0.5
+
+    // MARK: - Icons
+    static let tabIcon = "creditcard.fill"
+    static let iconAdd = "plus"
+
+    // MARK: - Format
+    static let currencyCode = "USD"
+
     // MARK: - Strings
     static let navigationTitle: LocalizedStringKey = "Subscriptions"
     static let labelMonthlyTotal: LocalizedStringKey = "Monthly Total"

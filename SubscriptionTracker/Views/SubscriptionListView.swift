@@ -25,7 +25,7 @@ struct SubscriptionListView: View {
                                 Text(SubscriptionListViewModel.labelMonthlyTotal)
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                Text(viewModel.monthlyTotal(in: subscriptions), format: .currency(code: "USD"))
+                                Text(viewModel.monthlyTotal(in: subscriptions), format: .currency(code: SubscriptionListViewModel.currencyCode))
                                     .font(.title2.bold())
                             }
                             Spacer()
@@ -33,7 +33,7 @@ struct SubscriptionListView: View {
                                 Text(SubscriptionListViewModel.labelAnnual)
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                Text(viewModel.annualTotal(in: subscriptions), format: .currency(code: "USD"))
+                                Text(viewModel.annualTotal(in: subscriptions), format: .currency(code: SubscriptionListViewModel.currencyCode))
                                     .font(.title3)
                                     .foregroundStyle(.secondary)
                             }
@@ -70,7 +70,7 @@ struct SubscriptionListView: View {
             .navigationTitle(SubscriptionListViewModel.navigationTitle)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button { showingAddSheet = true } label: { Image(systemName: "plus") }
+                    Button { showingAddSheet = true } label: { Image(systemName: SubscriptionListViewModel.iconAdd) }
                 }
             }
             .overlay {
@@ -118,14 +118,14 @@ struct SubscriptionRow: View {
             Spacer()
 
             VStack(alignment: .trailing, spacing: SubscriptionListViewModel.rowTextSpacing) {
-                Text(subscription.amount, format: .currency(code: "USD")).font(.headline)
+                Text(subscription.amount, format: .currency(code: SubscriptionListViewModel.currencyCode)).font(.headline)
                 Text(viewModel.renewalText(for: subscription))
                     .font(.caption)
                     .foregroundStyle(viewModel.renewalColor(for: subscription))
             }
         }
         .padding(.vertical, SubscriptionListViewModel.rowVerticalPadding)
-        .opacity(subscription.isActive ? 1.0 : 0.5)
+        .opacity(subscription.isActive ? SubscriptionListViewModel.activeOpacity : SubscriptionListViewModel.inactiveOpacity)
     }
 }
 

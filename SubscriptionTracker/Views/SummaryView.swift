@@ -18,10 +18,10 @@ struct SummaryView: View {
             List {
                 let monthly = viewModel.monthlyTotal(in: subscriptions)
                 Section {
-                    HStack(spacing: 0) {
+                    HStack(spacing: SummaryViewModel.tileDividerSpacing) {
                         StatTile(label: SummaryViewModel.labelMonthly, amount: monthly)
                         Divider().padding(.vertical, SummaryViewModel.tileVerticalPadding)
-                        StatTile(label: SummaryViewModel.labelAnnual, amount: monthly * 12)
+                        StatTile(label: SummaryViewModel.labelAnnual, amount: monthly * SummaryViewModel.monthsPerYear)
                     }
                 }
 
@@ -47,7 +47,7 @@ struct SummaryView: View {
                                     .frame(width: SummaryViewModel.categoryIconWidth)
                                 Text(item.category.localizedName)
                                 Spacer()
-                                Text(item.total, format: .currency(code: "USD"))
+                                Text(item.total, format: .currency(code: SummaryViewModel.currencyCode))
                                     .foregroundStyle(.secondary)
                                 Text(SummaryViewModel.labelPerMonth)
                                     .font(.caption)
@@ -71,7 +71,7 @@ struct SummaryView: View {
                                 }
                                 Spacer()
                                 VStack(alignment: .trailing, spacing: SummaryViewModel.rowTextSpacing) {
-                                    Text(sub.amount, format: .currency(code: "USD"))
+                                    Text(sub.amount, format: .currency(code: SummaryViewModel.currencyCode))
                                     Text(viewModel.renewalLabel(for: sub))
                                         .font(.caption)
                                         .foregroundStyle(viewModel.isUrgent(sub) ? .red : .secondary)
@@ -104,7 +104,7 @@ struct StatTile: View {
             Text(label)
                 .font(.caption)
                 .foregroundStyle(.secondary)
-            Text(amount, format: .currency(code: "USD"))
+            Text(amount, format: .currency(code: SummaryViewModel.currencyCode))
                 .font(.title3.bold())
         }
         .frame(maxWidth: .infinity)

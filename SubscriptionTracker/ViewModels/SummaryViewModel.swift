@@ -27,6 +27,14 @@ final class SummaryViewModel {
     // MARK: - Renewal Constants
     static let upcomingWindowDays = 30
     static let urgentRenewalThreshold = 3
+    static let monthsPerYear: Double = 12.0
+
+    // MARK: - Icons
+    static let tabIcon = "chart.pie.fill"
+
+    // MARK: - Format
+    static let currencyCode = "USD"
+    static let tileDividerSpacing: CGFloat = 0
 
     // MARK: - Strings
     static let navigationTitle: LocalizedStringKey = "Summary"

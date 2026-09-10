@@ -76,11 +76,11 @@ struct AddEditSubscriptionView: View {
                 if let monthly = viewModel.monthlyPreview {
                     Section(AddEditSubscriptionViewModel.sectionPreview) {
                         LabeledContent(AddEditSubscriptionViewModel.previewLabelMonthly) {
-                            Text(monthly, format: .currency(code: "USD"))
+                            Text(monthly, format: .currency(code: AddEditSubscriptionViewModel.currencyCode))
                                 .foregroundStyle(.secondary)
                         }
                         LabeledContent(AddEditSubscriptionViewModel.previewLabelAnnual) {
-                            Text(monthly * AddEditSubscriptionViewModel.monthsPerYear, format: .currency(code: "USD"))
+                            Text(monthly * AddEditSubscriptionViewModel.monthsPerYear, format: .currency(code: AddEditSubscriptionViewModel.currencyCode))
                                 .foregroundStyle(.secondary)
                         }
                     }

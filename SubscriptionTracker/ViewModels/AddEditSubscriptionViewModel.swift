@@ -19,6 +19,7 @@ final class AddEditSubscriptionViewModel {
     static let monthsPerYear: Double = 12.0
     static let maxCardDigits = 4
     static let amountFormat = "%.2f"
+    static let currencyCode = "USD"
 
     // MARK: - Navigation Strings
     static let titleNew: LocalizedStringKey = "New Subscription"
