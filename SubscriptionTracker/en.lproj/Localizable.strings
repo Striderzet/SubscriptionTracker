@@ -1,22 +1,24 @@
-/* Tabs */
-"Subscriptions" = "Subscriptions";
-"Summary" = "Summary";
+/* App — Tabs */
+"list.navigation.title" = "Subscriptions";
+"summary.navigation.title" = "Summary";
 
 /* BillingCycle */
-"Weekly" = "Weekly";
-"Monthly" = "Monthly";
-"Annual" = "Annual";
+"billing.weekly" = "Weekly";
+"billing.monthly" = "Monthly";
+"billing.annual" = "Annual";
 
 /* SubscriptionCategory */
-"Streaming" = "Streaming";
-"Software" = "Software";
-"Fitness" = "Fitness";
-"News" = "News";
-"Gaming" = "Gaming";
-"Other" = "Other";
+"category.streaming" = "Streaming";
+"category.software" = "Software";
+"category.fitness" = "Fitness";
+"category.news" = "News";
+"category.gaming" = "Gaming";
+"category.other" = "Other";
 
 /* Subscription List — Header */
-"Monthly Total" = "Monthly Total";
+"list.label.monthly_total" = "Monthly Total";
+"list.label.annual" = "Annual";
+"list.separator" = "·";
 
 /* Subscription List — Empty State */
 "list.empty.title" = "No Subscriptions";
@@ -32,6 +34,11 @@
 "renewal.tomorrow" = "Tomorrow";
 "renewal.in_days" = "in %dd";
 
+/* Summary — Labels */
+"summary.label.monthly" = "Monthly";
+"summary.label.annual" = "Annual";
+"summary.label.per_month" = "/ mo";
+
 /* Summary — Empty State */
 "summary.empty.title" = "No Data Yet";
 "summary.empty.description" = "Add subscriptions to see your spending summary.";
@@ -44,28 +51,30 @@
 "chart.label.amount" = "Amount";
 "chart.label.category" = "Category";
 
-/* Summary — Labels */
-"/ mo" = "/ mo";
+/* Add/Edit Form — Navigation & Actions */
+"form.title.new" = "New Subscription";
+"form.title.edit" = "Edit Subscription";
+"form.button.cancel" = "Cancel";
+"form.button.save" = "Save";
 
 /* Add/Edit Form — Sections */
-"Details" = "Details";
-"Category" = "Category";
-"Card on File" = "Card on File";
-"Cost Preview" = "Cost Preview";
+"form.section.details" = "Details";
+"form.section.category" = "Category";
+"form.section.card" = "Card on File";
+"form.section.preview" = "Cost Preview";
 
 /* Add/Edit Form — Fields */
-"Name (e.g. Netflix)" = "Name (e.g. Netflix)";
-"Merchant (e.g. Netflix, Inc.)" = "Merchant (e.g. Netflix, Inc.)";
-"$" = "$";
-"0.00" = "0.00";
-"Billing Cycle" = "Billing Cycle";
-"Next Renewal" = "Next Renewal";
-"Last 4 digits" = "Last 4 digits";
-"1234" = "1234";
-"Active" = "Active";
+"form.field.name" = "Name (e.g. Netflix)";
+"form.field.merchant" = "Merchant (e.g. Netflix, Inc.)";
+"form.field.amount" = "0.00";
+"form.field.billing_cycle" = "Billing Cycle";
+"form.field.next_renewal" = "Next Renewal";
+"form.field.category" = "Category";
+"form.field.card.label" = "Last 4 digits";
+"form.field.card.placeholder" = "1234";
+"form.field.currency.prefix" = "$";
+"form.toggle.active" = "Active";
 
-/* Add/Edit Form — Navigation & Actions */
-"New Subscription" = "New Subscription";
-"Edit Subscription" = "Edit Subscription";
-"Cancel" = "Cancel";
-"Save" = "Save";
+/* Add/Edit Form — Cost Preview */
+"form.preview.monthly" = "Monthly";
+"form.preview.annual" = "Annual";

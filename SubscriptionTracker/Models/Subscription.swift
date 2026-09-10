@@ -14,7 +14,13 @@ enum BillingCycle: String, Codable, CaseIterable {
     case monthly = "Monthly"
     case annual = "Annual"
 
-    var localizedName: String { NSLocalizedString(rawValue, comment: "") }
+    var localizedName: String {
+        switch self {
+        case .weekly:  NSLocalizedString("billing.weekly", comment: "")
+        case .monthly: NSLocalizedString("billing.monthly", comment: "")
+        case .annual:  NSLocalizedString("billing.annual", comment: "")
+        }
+    }
 }
 
 enum SubscriptionCategory: String, Codable, CaseIterable {
@@ -47,7 +53,16 @@ enum SubscriptionCategory: String, Codable, CaseIterable {
         }
     }
 
-    var localizedName: String { NSLocalizedString(rawValue, comment: "") }
+    var localizedName: String {
+        switch self {
+        case .streaming: NSLocalizedString("category.streaming", comment: "")
+        case .software:  NSLocalizedString("category.software", comment: "")
+        case .fitness:   NSLocalizedString("category.fitness", comment: "")
+        case .news:      NSLocalizedString("category.news", comment: "")
+        case .gaming:    NSLocalizedString("category.gaming", comment: "")
+        case .other:     NSLocalizedString("category.other", comment: "")
+        }
+    }
 }
 
 @Model

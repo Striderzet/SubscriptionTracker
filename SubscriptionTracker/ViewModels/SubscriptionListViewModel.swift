@@ -38,10 +38,10 @@ final class SubscriptionListViewModel {
     static let currencyCode = "USD"
 
     // MARK: - Strings
-    static let navigationTitle: LocalizedStringKey = "Subscriptions"
-    static let labelMonthlyTotal: LocalizedStringKey = "Monthly Total"
-    static let labelAnnual: LocalizedStringKey = "Annual"
-    static let separatorDot: LocalizedStringKey = "·"
+    static let navigationTitle: LocalizedStringKey = "list.navigation.title"
+    static let labelMonthlyTotal: LocalizedStringKey = "list.label.monthly_total"
+    static let labelAnnual: LocalizedStringKey = "list.label.annual"
+    static let separatorDot: LocalizedStringKey = "list.separator"
     static let emptyStateTitle: LocalizedStringKey = "list.empty.title"
     static let emptyStateDescription: LocalizedStringKey = "list.empty.description"
     static let emptyStateIcon = "creditcard.fill"

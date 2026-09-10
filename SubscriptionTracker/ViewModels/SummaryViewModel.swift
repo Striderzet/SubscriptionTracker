@@ -37,10 +37,10 @@ final class SummaryViewModel {
     static let tileDividerSpacing: CGFloat = 0
 
     // MARK: - Strings
-    static let navigationTitle: LocalizedStringKey = "Summary"
-    static let labelMonthly: LocalizedStringKey = "Monthly"
-    static let labelAnnual: LocalizedStringKey = "Annual"
-    static let labelPerMonth: LocalizedStringKey = "/ mo"
+    static let navigationTitle: LocalizedStringKey = "summary.navigation.title"
+    static let labelMonthly: LocalizedStringKey = "summary.label.monthly"
+    static let labelAnnual: LocalizedStringKey = "summary.label.annual"
+    static let labelPerMonth: LocalizedStringKey = "summary.label.per_month"
     static let emptyStateTitle: LocalizedStringKey = "summary.empty.title"
     static let emptyStateDescription: LocalizedStringKey = "summary.empty.description"
     static let emptyStateIcon = "chart.pie.fill"
