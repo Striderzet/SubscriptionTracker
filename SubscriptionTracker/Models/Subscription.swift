@@ -1,3 +1,10 @@
+//
+//  Subscription.swift
+//  SubscriptionTracker
+//
+//  Created by Tony Buckner on 9/10/26.
+//
+
 import Foundation
 import SwiftData
 import SwiftUI
