@@ -16,17 +16,26 @@ final class SubscriptionListViewModel {
     static let badgeIconSize: CGFloat = 16
     static let badgeCornerRadius: CGFloat = 10
     static let rowVerticalPadding: CGFloat = 2
+    static let rowSpacing: CGFloat = 12
+    static let rowTextSpacing: CGFloat = 2
+    static let subtitleSpacing: CGFloat = 4
+    static let headerSpacing: CGFloat = 4
+    static let headerVerticalPadding: CGFloat = 4
 
     // MARK: - Renewal Thresholds
     static let urgentDayThreshold = 1
     static let warningDayThreshold = 3
 
     // MARK: - Strings
-    static let emptyStateTitle = "No Subscriptions"
+    static let navigationTitle: LocalizedStringKey = "Subscriptions"
+    static let labelMonthlyTotal: LocalizedStringKey = "Monthly Total"
+    static let labelAnnual: LocalizedStringKey = "Annual"
+    static let separatorDot: LocalizedStringKey = "·"
+    static let emptyStateTitle: LocalizedStringKey = "list.empty.title"
+    static let emptyStateDescription: LocalizedStringKey = "list.empty.description"
     static let emptyStateIcon = "creditcard.fill"
-    static let emptyStateDescription = "Tap + to track your first subscription."
-    static let sectionActive = "Active"
-    static let sectionInactive = "Inactive"
+    static let sectionActive: LocalizedStringKey = "list.section.active"
+    static let sectionInactive: LocalizedStringKey = "list.section.inactive"
 
     // MARK: - Data
     func active(in subscriptions: [Subscription]) -> [Subscription] {
@@ -41,6 +50,10 @@ final class SubscriptionListViewModel {
         active(in: subscriptions).reduce(0) { $0 + $1.monthlyEquivalent }
     }
 
+    func annualTotal(in subscriptions: [Subscription]) -> Double {
+        monthlyTotal(in: subscriptions) * 12.0
+    }
+
     func delete(from list: [Subscription], at offsets: IndexSet, context: ModelContext) {
         offsets.forEach { context.delete(list[$0]) }
     }
@@ -48,18 +61,22 @@ final class SubscriptionListViewModel {
     // MARK: - Formatting
     func renewalText(for subscription: Subscription) -> String {
         switch subscription.daysUntilRenewal {
-        case ..<0: return "Overdue"
-        case 0:    return "Today"
-        case 1:    return "Tomorrow"
-        default:   return "in \(subscription.daysUntilRenewal)d"
+        case ..<0: return String(localized: "renewal.overdue")
+        case 0:    return String(localized: "renewal.today")
+        case 1:    return String(localized: "renewal.tomorrow")
+        default:   return String(format: NSLocalizedString("renewal.in_days", comment: ""), subscription.daysUntilRenewal)
         }
     }
 
     func renewalColor(for subscription: Subscription) -> Color {
         switch subscription.daysUntilRenewal {
-        case ..<Self.urgentDayThreshold:                              return .red
-        case Self.urgentDayThreshold...Self.warningDayThreshold:     return .orange
-        default:                                                      return .secondary
+        case ..<Self.urgentDayThreshold:                          return .red
+        case Self.urgentDayThreshold...Self.warningDayThreshold:  return .orange
+        default:                                                   return .secondary
         }
+    }
+
+    func maskedCard(lastFour: String) -> String {
+        "···· \(lastFour)"
     }
 }

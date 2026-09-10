@@ -19,9 +19,9 @@ struct SummaryView: View {
                 let monthly = viewModel.monthlyTotal(in: subscriptions)
                 Section {
                     HStack(spacing: 0) {
-                        StatTile(label: "Monthly", amount: monthly)
-                        Divider().padding(.vertical, 8)
-                        StatTile(label: "Annual", amount: monthly * 12)
+                        StatTile(label: SummaryViewModel.labelMonthly, amount: monthly)
+                        Divider().padding(.vertical, SummaryViewModel.tileVerticalPadding)
+                        StatTile(label: SummaryViewModel.labelAnnual, amount: monthly * 12)
                     }
                 }
 
@@ -30,26 +30,26 @@ struct SummaryView: View {
                     Section(SummaryViewModel.sectionCategory) {
                         Chart(categories, id: \.category) { item in
                             SectorMark(
-                                angle: .value("Amount", item.total),
+                                angle: .value(SummaryViewModel.chartLabelAmount, item.total),
                                 innerRadius: .ratio(SummaryViewModel.chartInnerRadiusRatio),
                                 angularInset: SummaryViewModel.chartAngularInset
                             )
                             .cornerRadius(SummaryViewModel.chartCornerRadius)
-                            .foregroundStyle(by: .value("Category", item.category.rawValue))
+                            .foregroundStyle(by: .value(SummaryViewModel.chartLabelCategory, item.category.localizedName))
                         }
                         .frame(height: SummaryViewModel.chartHeight)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, SummaryViewModel.chartVerticalPadding)
 
                         ForEach(categories, id: \.category) { item in
                             HStack {
                                 Image(systemName: item.category.icon)
                                     .foregroundStyle(.secondary)
-                                    .frame(width: 22)
-                                Text(item.category.rawValue)
+                                    .frame(width: SummaryViewModel.categoryIconWidth)
+                                Text(item.category.localizedName)
                                 Spacer()
                                 Text(item.total, format: .currency(code: "USD"))
                                     .foregroundStyle(.secondary)
-                                Text("/ mo")
+                                Text(SummaryViewModel.labelPerMonth)
                                     .font(.caption)
                                     .foregroundStyle(.tertiary)
                             }
@@ -61,16 +61,16 @@ struct SummaryView: View {
                 if !upcoming.isEmpty {
                     Section(SummaryViewModel.sectionUpcoming) {
                         ForEach(upcoming) { sub in
-                            HStack(spacing: 12) {
+                            HStack(spacing: SummaryViewModel.rowSpacing) {
                                 CategoryBadge(category: sub.category)
-                                VStack(alignment: .leading, spacing: 2) {
+                                VStack(alignment: .leading, spacing: SummaryViewModel.rowTextSpacing) {
                                     Text(sub.name).font(.headline)
                                     Text(sub.nextRenewal, style: .date)
                                         .font(.caption)
                                         .foregroundStyle(.secondary)
                                 }
                                 Spacer()
-                                VStack(alignment: .trailing, spacing: 2) {
+                                VStack(alignment: .trailing, spacing: SummaryViewModel.rowTextSpacing) {
                                     Text(sub.amount, format: .currency(code: "USD"))
                                     Text(viewModel.renewalLabel(for: sub))
                                         .font(.caption)
@@ -81,7 +81,7 @@ struct SummaryView: View {
                     }
                 }
             }
-            .navigationTitle("Summary")
+            .navigationTitle(SummaryViewModel.navigationTitle)
             .overlay {
                 if subscriptions.isEmpty {
                     ContentUnavailableView(
@@ -96,11 +96,11 @@ struct SummaryView: View {
 }
 
 struct StatTile: View {
-    let label: String
+    let label: LocalizedStringKey
     let amount: Double
 
     var body: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: SummaryViewModel.rowTextSpacing) {
             Text(label)
                 .font(.caption)
                 .foregroundStyle(.secondary)
@@ -108,6 +108,6 @@ struct StatTile: View {
                 .font(.title3.bold())
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 4)
+        .padding(.vertical, SummaryViewModel.tileVerticalPadding)
     }
 }

@@ -11,11 +11,40 @@ import SwiftData
 @Observable
 final class AddEditSubscriptionViewModel {
 
-    // MARK: - Constants
+    // MARK: - Layout Constants
+    static let cardDigitsFieldWidth: CGFloat = 60
+
+    // MARK: - Business Constants
     static let weeksPerMonth: Double = 4.33
     static let monthsPerYear: Double = 12.0
     static let maxCardDigits = 4
     static let amountFormat = "%.2f"
+
+    // MARK: - Navigation Strings
+    static let titleNew: LocalizedStringKey = "New Subscription"
+    static let titleEdit: LocalizedStringKey = "Edit Subscription"
+
+    // MARK: - Section Strings
+    static let sectionDetails: LocalizedStringKey = "Details"
+    static let sectionCategory: LocalizedStringKey = "Category"
+    static let sectionCard: LocalizedStringKey = "Card on File"
+    static let sectionPreview: LocalizedStringKey = "Cost Preview"
+
+    // MARK: - Field Strings
+    static let fieldNamePlaceholder: LocalizedStringKey = "Name (e.g. Netflix)"
+    static let fieldMerchantPlaceholder: LocalizedStringKey = "Merchant (e.g. Netflix, Inc.)"
+    static let fieldAmountPlaceholder: LocalizedStringKey = "0.00"
+    static let fieldBillingCycleLabel: LocalizedStringKey = "Billing Cycle"
+    static let fieldNextRenewalLabel: LocalizedStringKey = "Next Renewal"
+    static let fieldCategoryLabel: LocalizedStringKey = "Category"
+    static let fieldCardLabel: LocalizedStringKey = "Last 4 digits"
+    static let fieldCardPlaceholder: LocalizedStringKey = "1234"
+    static let fieldCurrencyPrefix: LocalizedStringKey = "$"
+    static let toggleActive: LocalizedStringKey = "Active"
+    static let previewLabelMonthly: LocalizedStringKey = "Monthly"
+    static let previewLabelAnnual: LocalizedStringKey = "Annual"
+    static let buttonCancel: LocalizedStringKey = "Cancel"
+    static let buttonSave: LocalizedStringKey = "Save"
 
     // MARK: - Form State
     var name = ""

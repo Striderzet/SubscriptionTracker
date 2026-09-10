@@ -13,6 +13,8 @@ enum BillingCycle: String, Codable, CaseIterable {
     case weekly = "Weekly"
     case monthly = "Monthly"
     case annual = "Annual"
+
+    var localizedName: String { NSLocalizedString(rawValue, comment: "") }
 }
 
 enum SubscriptionCategory: String, Codable, CaseIterable {
@@ -44,6 +46,8 @@ enum SubscriptionCategory: String, Codable, CaseIterable {
         case .other: .gray
         }
     }
+
+    var localizedName: String { NSLocalizedString(rawValue, comment: "") }
 }
 
 @Model

@@ -1,0 +1,71 @@
+/* Tabs */
+"Subscriptions" = "Subscriptions";
+"Summary" = "Summary";
+
+/* BillingCycle */
+"Weekly" = "Weekly";
+"Monthly" = "Monthly";
+"Annual" = "Annual";
+
+/* SubscriptionCategory */
+"Streaming" = "Streaming";
+"Software" = "Software";
+"Fitness" = "Fitness";
+"News" = "News";
+"Gaming" = "Gaming";
+"Other" = "Other";
+
+/* Subscription List — Header */
+"Monthly Total" = "Monthly Total";
+
+/* Subscription List — Empty State */
+"list.empty.title" = "No Subscriptions";
+"list.empty.description" = "Tap + to track your first subscription.";
+
+/* Subscription List — Sections */
+"list.section.active" = "Active";
+"list.section.inactive" = "Inactive";
+
+/* Renewal Status */
+"renewal.overdue" = "Overdue";
+"renewal.today" = "Today";
+"renewal.tomorrow" = "Tomorrow";
+"renewal.in_days" = "in %dd";
+
+/* Summary — Empty State */
+"summary.empty.title" = "No Data Yet";
+"summary.empty.description" = "Add subscriptions to see your spending summary.";
+
+/* Summary — Sections */
+"summary.section.category" = "Spending by Category";
+"summary.section.upcoming" = "Renewing in 30 Days";
+
+/* Summary — Chart Accessibility */
+"chart.label.amount" = "Amount";
+"chart.label.category" = "Category";
+
+/* Summary — Labels */
+"/ mo" = "/ mo";
+
+/* Add/Edit Form — Sections */
+"Details" = "Details";
+"Category" = "Category";
+"Card on File" = "Card on File";
+"Cost Preview" = "Cost Preview";
+
+/* Add/Edit Form — Fields */
+"Name (e.g. Netflix)" = "Name (e.g. Netflix)";
+"Merchant (e.g. Netflix, Inc.)" = "Merchant (e.g. Netflix, Inc.)";
+"$" = "$";
+"0.00" = "0.00";
+"Billing Cycle" = "Billing Cycle";
+"Next Renewal" = "Next Renewal";
+"Last 4 digits" = "Last 4 digits";
+"1234" = "1234";
+"Active" = "Active";
+
+/* Add/Edit Form — Navigation & Actions */
+"New Subscription" = "New Subscription";
+"Edit Subscription" = "Edit Subscription";
+"Cancel" = "Cancel";
+"Save" = "Save";

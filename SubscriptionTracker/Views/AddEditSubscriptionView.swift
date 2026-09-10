@@ -28,37 +28,37 @@ struct AddEditSubscriptionView: View {
         @Bindable var vm = viewModel
         NavigationStack {
             Form {
-                Section("Details") {
-                    TextField("Name (e.g. Netflix)", text: $vm.name)
-                    TextField("Merchant (e.g. Netflix, Inc.)", text: $vm.merchant)
+                Section(AddEditSubscriptionViewModel.sectionDetails) {
+                    TextField(AddEditSubscriptionViewModel.fieldNamePlaceholder, text: $vm.name)
+                    TextField(AddEditSubscriptionViewModel.fieldMerchantPlaceholder, text: $vm.merchant)
                     HStack {
-                        Text("$").foregroundStyle(.secondary)
-                        TextField("0.00", text: $vm.amountText)
+                        Text(AddEditSubscriptionViewModel.fieldCurrencyPrefix).foregroundStyle(.secondary)
+                        TextField(AddEditSubscriptionViewModel.fieldAmountPlaceholder, text: $vm.amountText)
                             .keyboardType(.decimalPad)
                     }
-                    Picker("Billing Cycle", selection: $vm.billingCycle) {
-                        ForEach(BillingCycle.allCases, id: \.self) { Text($0.rawValue).tag($0) }
+                    Picker(AddEditSubscriptionViewModel.fieldBillingCycleLabel, selection: $vm.billingCycle) {
+                        ForEach(BillingCycle.allCases, id: \.self) { Text($0.localizedName).tag($0) }
                     }
-                    DatePicker("Next Renewal", selection: $vm.nextRenewal, displayedComponents: .date)
+                    DatePicker(AddEditSubscriptionViewModel.fieldNextRenewalLabel, selection: $vm.nextRenewal, displayedComponents: .date)
                 }
 
-                Section("Category") {
-                    Picker("Category", selection: $vm.category) {
+                Section(AddEditSubscriptionViewModel.sectionCategory) {
+                    Picker(AddEditSubscriptionViewModel.fieldCategoryLabel, selection: $vm.category) {
                         ForEach(SubscriptionCategory.allCases, id: \.self) { cat in
-                            Label(cat.rawValue, systemImage: cat.icon).tag(cat)
+                            Label(cat.localizedName, systemImage: cat.icon).tag(cat)
                         }
                     }
                     .pickerStyle(.navigationLink)
                 }
 
-                Section("Card on File") {
+                Section(AddEditSubscriptionViewModel.sectionCard) {
                     HStack {
-                        Text("Last 4 digits").foregroundStyle(.secondary)
+                        Text(AddEditSubscriptionViewModel.fieldCardLabel).foregroundStyle(.secondary)
                         Spacer()
-                        TextField("1234", text: $vm.cardLastFour)
+                        TextField(AddEditSubscriptionViewModel.fieldCardPlaceholder, text: $vm.cardLastFour)
                             .keyboardType(.numberPad)
                             .multilineTextAlignment(.trailing)
-                            .frame(width: 60)
+                            .frame(width: AddEditSubscriptionViewModel.cardDigitsFieldWidth)
                             .onChange(of: vm.cardLastFour) { _, new in
                                 if new.count > AddEditSubscriptionViewModel.maxCardDigits {
                                     vm.cardLastFour = String(new.prefix(AddEditSubscriptionViewModel.maxCardDigits))
@@ -69,31 +69,31 @@ struct AddEditSubscriptionView: View {
 
                 if subscription != nil {
                     Section {
-                        Toggle("Active", isOn: $vm.isActive)
+                        Toggle(AddEditSubscriptionViewModel.toggleActive, isOn: $vm.isActive)
                     }
                 }
 
                 if let monthly = viewModel.monthlyPreview {
-                    Section("Cost Preview") {
-                        LabeledContent("Monthly") {
+                    Section(AddEditSubscriptionViewModel.sectionPreview) {
+                        LabeledContent(AddEditSubscriptionViewModel.previewLabelMonthly) {
                             Text(monthly, format: .currency(code: "USD"))
                                 .foregroundStyle(.secondary)
                         }
-                        LabeledContent("Annual") {
+                        LabeledContent(AddEditSubscriptionViewModel.previewLabelAnnual) {
                             Text(monthly * AddEditSubscriptionViewModel.monthsPerYear, format: .currency(code: "USD"))
                                 .foregroundStyle(.secondary)
                         }
                     }
                 }
             }
-            .navigationTitle(subscription == nil ? "New Subscription" : "Edit Subscription")
+            .navigationTitle(subscription == nil ? AddEditSubscriptionViewModel.titleNew : AddEditSubscriptionViewModel.titleEdit)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
+                    Button(AddEditSubscriptionViewModel.buttonCancel) { dismiss() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
+                    Button(AddEditSubscriptionViewModel.buttonSave) {
                         viewModel.save(editing: subscription, context: modelContext)
                         dismiss()
                     }

@@ -17,6 +17,7 @@
 		AABBAABBAABBAABBAABB0031 /* SubscriptionListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0030 /* SubscriptionListViewModel.swift */; };
 		AABBAABBAABBAABBAABB0033 /* AddEditSubscriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0032 /* AddEditSubscriptionViewModel.swift */; };
 		AABBAABBAABBAABBAABB0035 /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0034 /* SummaryViewModel.swift */; };
+		AABBAABBAABBAABBAABB0042 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0041 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +32,19 @@
 		AABBAABBAABBAABBAABB0030 /* SubscriptionListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListViewModel.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0032 /* AddEditSubscriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditSubscriptionViewModel.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0034 /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB0040 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXVariantGroup section */
+		AABBAABBAABBAABBAABB0041 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AABBAABBAABBAABBAABB0040 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AABBAABBAABBAABBAABB000B /* Frameworks */ = {
@@ -59,6 +72,7 @@
 				AABBAABBAABBAABBAABB000E /* Models */,
 				AABBAABBAABBAABBAABB000F /* Views */,
 				AABBAABBAABBAABBAABB0036 /* ViewModels */,
+				AABBAABBAABBAABBAABB0041 /* Localizable.strings */,
 				AABBAABBAABBAABBAABB0018 /* Assets.xcassets */,
 				AABBAABBAABBAABBAABB0011 /* Preview Content */,
 			);
@@ -169,6 +183,7 @@
 			files = (
 				AABBAABBAABBAABBAABB001F /* Assets.xcassets in Resources */,
 				AABBAABBAABBAABBAABB0020 /* Preview Assets.xcassets in Resources */,
+				AABBAABBAABBAABBAABB0042 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,24 +21,24 @@ struct SubscriptionListView: View {
                 if !subscriptions.isEmpty {
                     Section {
                         HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text("Monthly Total")
+                            VStack(alignment: .leading, spacing: SubscriptionListViewModel.headerSpacing) {
+                                Text(SubscriptionListViewModel.labelMonthlyTotal)
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                                 Text(viewModel.monthlyTotal(in: subscriptions), format: .currency(code: "USD"))
                                     .font(.title2.bold())
                             }
                             Spacer()
-                            VStack(alignment: .trailing, spacing: 4) {
-                                Text("Annual")
+                            VStack(alignment: .trailing, spacing: SubscriptionListViewModel.headerSpacing) {
+                                Text(SubscriptionListViewModel.labelAnnual)
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
-                                Text(viewModel.monthlyTotal(in: subscriptions) * 12, format: .currency(code: "USD"))
+                                Text(viewModel.annualTotal(in: subscriptions), format: .currency(code: "USD"))
                                     .font(.title3)
                                     .foregroundStyle(.secondary)
                             }
                         }
-                        .padding(.vertical, 4)
+                        .padding(.vertical, SubscriptionListViewModel.headerVerticalPadding)
                     }
                 }
 
@@ -67,7 +67,7 @@ struct SubscriptionListView: View {
                     }
                 }
             }
-            .navigationTitle("Subscriptions")
+            .navigationTitle(SubscriptionListViewModel.navigationTitle)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button { showingAddSheet = true } label: { Image(systemName: "plus") }
@@ -97,18 +97,18 @@ struct SubscriptionRow: View {
     let viewModel: SubscriptionListViewModel
 
     var body: some View {
-        HStack(spacing: 12) {
+        HStack(spacing: SubscriptionListViewModel.rowSpacing) {
             CategoryBadge(category: subscription.category)
 
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: SubscriptionListViewModel.rowTextSpacing) {
                 Text(subscription.name).font(.headline)
-                HStack(spacing: 4) {
-                    Text(subscription.billingCycle.rawValue)
+                HStack(spacing: SubscriptionListViewModel.subtitleSpacing) {
+                    Text(subscription.billingCycle.localizedName)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                     if !subscription.cardLastFour.isEmpty {
-                        Text("·").foregroundStyle(.tertiary)
-                        Text("···· \(subscription.cardLastFour)")
+                        Text(SubscriptionListViewModel.separatorDot).foregroundStyle(.tertiary)
+                        Text(viewModel.maskedCard(lastFour: subscription.cardLastFour))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -117,7 +117,7 @@ struct SubscriptionRow: View {
 
             Spacer()
 
-            VStack(alignment: .trailing, spacing: 2) {
+            VStack(alignment: .trailing, spacing: SubscriptionListViewModel.rowTextSpacing) {
                 Text(subscription.amount, format: .currency(code: "USD")).font(.headline)
                 Text(viewModel.renewalText(for: subscription))
                     .font(.caption)
