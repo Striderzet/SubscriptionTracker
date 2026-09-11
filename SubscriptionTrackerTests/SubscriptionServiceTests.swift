@@ -73,12 +73,12 @@ final class SubscriptionServiceTests: XCTestCase {
         XCTAssertEqual(result.count, 2)
     }
 
-    func testCategoryDataSumsAmountsWithinEachGroup() {
+    func testCategoryDataSumsAmountsWithinEachGroup() throws {
         let result = service.categoryData(in: [
             makeSubscription(amount: 10.0, category: .streaming),
             makeSubscription(amount: 5.0, category: .streaming)
         ])
-        XCTAssertEqual(result.first?.total, 15.0, accuracy: 0.001)
+        XCTAssertEqual(try XCTUnwrap(result.first?.total), 15.0, accuracy: 0.001)
     }
 
     func testCategoryDataSortsByTotalDescending() {
