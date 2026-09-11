@@ -96,25 +96,25 @@ final class AddEditSubscriptionViewModelTests: XCTestCase {
         XCTAssertNil(AddEditSubscriptionViewModel().monthlyPreview)
     }
 
-    func testMonthlyPreviewForMonthlyBillingCycle() {
+    func testMonthlyPreviewForMonthlyBillingCycle() throws {
         let vm = AddEditSubscriptionViewModel()
         vm.amountText = "10.00"
         vm.billingCycle = .monthly
-        XCTAssertEqual(vm.monthlyPreview, 10.0, accuracy: 0.001)
+        XCTAssertEqual(try XCTUnwrap(vm.monthlyPreview), 10.0, accuracy: 0.001)
     }
 
-    func testMonthlyPreviewForWeeklyBillingCycle() {
+    func testMonthlyPreviewForWeeklyBillingCycle() throws {
         let vm = AddEditSubscriptionViewModel()
         vm.amountText = "10.00"
         vm.billingCycle = .weekly
-        XCTAssertEqual(vm.monthlyPreview, 10.0 * BillingCycle.weeksPerMonth, accuracy: 0.001)
+        XCTAssertEqual(try XCTUnwrap(vm.monthlyPreview), 10.0 * BillingCycle.weeksPerMonth, accuracy: 0.001)
     }
 
-    func testMonthlyPreviewForAnnualBillingCycle() {
+    func testMonthlyPreviewForAnnualBillingCycle() throws {
         let vm = AddEditSubscriptionViewModel()
         vm.amountText = "120.00"
         vm.billingCycle = .annual
-        XCTAssertEqual(vm.monthlyPreview, 10.0, accuracy: 0.001)
+        XCTAssertEqual(try XCTUnwrap(vm.monthlyPreview), 10.0, accuracy: 0.001)
     }
 
     // MARK: - annualPreview
@@ -123,11 +123,11 @@ final class AddEditSubscriptionViewModelTests: XCTestCase {
         XCTAssertNil(AddEditSubscriptionViewModel().annualPreview)
     }
 
-    func testAnnualPreviewIsDerivedFromMonthlyPreview() {
+    func testAnnualPreviewIsDerivedFromMonthlyPreview() throws {
         let vm = AddEditSubscriptionViewModel()
         vm.amountText = "10.00"
         vm.billingCycle = .monthly
-        XCTAssertEqual(vm.annualPreview, 10.0 * BillingCycle.monthsPerYear, accuracy: 0.001)
+        XCTAssertEqual(try XCTUnwrap(vm.annualPreview), 10.0 * BillingCycle.monthsPerYear, accuracy: 0.001)
     }
 
     // MARK: - populate(from:)
