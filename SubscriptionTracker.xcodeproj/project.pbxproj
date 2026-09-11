@@ -19,6 +19,14 @@
 		AABBAABBAABBAABBAABB0035 /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0034 /* SummaryViewModel.swift */; };
 		AABBAABBAABBAABBAABB0042 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0041 /* Localizable.strings */; };
 		AABBAABBAABBAABBAABB0051 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0050 /* SubscriptionService.swift */; };
+		AABBAABBAABBAABBAABB0071 /* MockSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0070 /* MockSubscriptionService.swift */; };
+		AABBAABBAABBAABBAABB0073 /* BillingCycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0072 /* BillingCycleTests.swift */; };
+		AABBAABBAABBAABBAABB0075 /* SubscriptionCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0074 /* SubscriptionCategoryTests.swift */; };
+		AABBAABBAABBAABBAABB0077 /* SubscriptionModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0076 /* SubscriptionModelTests.swift */; };
+		AABBAABBAABBAABBAABB0079 /* SubscriptionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0078 /* SubscriptionServiceTests.swift */; };
+		AABBAABBAABBAABBAABB007B /* SubscriptionListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB007A /* SubscriptionListViewModelTests.swift */; };
+		AABBAABBAABBAABBAABB007D /* SummaryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB007C /* SummaryViewModelTests.swift */; };
+		AABBAABBAABBAABBAABB007F /* AddEditSubscriptionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB007E /* AddEditSubscriptionViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +43,26 @@
 		AABBAABBAABBAABBAABB0034 /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0040 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0050 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB0061 /* SubscriptionTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubscriptionTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABBAABBAABBAABBAABB0070 /* MockSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSubscriptionService.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB0072 /* BillingCycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingCycleTests.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB0074 /* SubscriptionCategoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCategoryTests.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB0076 /* SubscriptionModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModelTests.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB0078 /* SubscriptionServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionServiceTests.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB007A /* SubscriptionListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListViewModelTests.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB007C /* SummaryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModelTests.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB007E /* AddEditSubscriptionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditSubscriptionViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXContainerItemProxy section */
+		AABBAABBAABBAABBAABB006A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AABBAABBAABBAABBAABB0001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AABBAABBAABBAABBAABB0002;
+			remoteInfo = SubscriptionTracker;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXVariantGroup section */
 		AABBAABBAABBAABBAABB0041 /* Localizable.strings */ = {
@@ -56,6 +83,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AABBAABBAABBAABBAABB0064 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -63,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				AABBAABBAABBAABBAABB000D /* SubscriptionTracker */,
+				AABBAABBAABBAABBAABB0060 /* SubscriptionTrackerTests */,
 				AABBAABBAABBAABBAABB0010 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,8 +147,24 @@
 			isa = PBXGroup;
 			children = (
 				AABBAABBAABBAABBAABB0012 /* SubscriptionTracker.app */,
+				AABBAABBAABBAABBAABB0061 /* SubscriptionTrackerTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AABBAABBAABBAABBAABB0060 /* SubscriptionTrackerTests */ = {
+			isa = PBXGroup;
+			children = (
+				AABBAABBAABBAABBAABB0070 /* MockSubscriptionService.swift */,
+				AABBAABBAABBAABBAABB0072 /* BillingCycleTests.swift */,
+				AABBAABBAABBAABBAABB0074 /* SubscriptionCategoryTests.swift */,
+				AABBAABBAABBAABBAABB0076 /* SubscriptionModelTests.swift */,
+				AABBAABBAABBAABBAABB0078 /* SubscriptionServiceTests.swift */,
+				AABBAABBAABBAABBAABB007A /* SubscriptionListViewModelTests.swift */,
+				AABBAABBAABBAABBAABB007C /* SummaryViewModelTests.swift */,
+				AABBAABBAABBAABBAABB007E /* AddEditSubscriptionViewModelTests.swift */,
+			);
+			path = SubscriptionTrackerTests;
 			sourceTree = "<group>";
 		};
 		AABBAABBAABBAABBAABB0036 /* ViewModels */ = {
@@ -154,6 +205,24 @@
 			productReference = AABBAABBAABBAABBAABB0012 /* SubscriptionTracker.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AABBAABBAABBAABBAABB0062 /* SubscriptionTrackerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AABBAABBAABBAABBAABB0068 /* Build configuration list for PBXNativeTarget "SubscriptionTrackerTests" */;
+			buildPhases = (
+				AABBAABBAABBAABBAABB0063 /* Sources */,
+				AABBAABBAABBAABBAABB0064 /* Frameworks */,
+				AABBAABBAABBAABBAABB0065 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AABBAABBAABBAABBAABB0069 /* PBXTargetDependency */,
+			);
+			name = SubscriptionTrackerTests;
+			productName = SubscriptionTrackerTests;
+			productReference = AABBAABBAABBAABBAABB0061 /* SubscriptionTrackerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -166,6 +235,10 @@
 				TargetAttributes = {
 					AABBAABBAABBAABBAABB0002 = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					AABBAABBAABBAABBAABB0062 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = AABBAABBAABBAABBAABB0002;
 					};
 				};
 			};
@@ -183,6 +256,7 @@
 			projectRoot = "";
 			targets = (
 				AABBAABBAABBAABBAABB0002 /* SubscriptionTracker */,
+				AABBAABBAABBAABBAABB0062 /* SubscriptionTrackerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -195,6 +269,13 @@
 				AABBAABBAABBAABBAABB001F /* Assets.xcassets in Resources */,
 				AABBAABBAABBAABBAABB0020 /* Preview Assets.xcassets in Resources */,
 				AABBAABBAABBAABBAABB0042 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AABBAABBAABBAABBAABB0065 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,7 +298,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AABBAABBAABBAABBAABB0063 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABBAABBAABBAABBAABB0071 /* MockSubscriptionService.swift in Sources */,
+				AABBAABBAABBAABBAABB0073 /* BillingCycleTests.swift in Sources */,
+				AABBAABBAABBAABBAABB0075 /* SubscriptionCategoryTests.swift in Sources */,
+				AABBAABBAABBAABBAABB0077 /* SubscriptionModelTests.swift in Sources */,
+				AABBAABBAABBAABBAABB0079 /* SubscriptionServiceTests.swift in Sources */,
+				AABBAABBAABBAABBAABB007B /* SubscriptionListViewModelTests.swift in Sources */,
+				AABBAABBAABBAABBAABB007D /* SummaryViewModelTests.swift in Sources */,
+				AABBAABBAABBAABBAABB007F /* AddEditSubscriptionViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AABBAABBAABBAABBAABB0069 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AABBAABBAABBAABBAABB0002 /* SubscriptionTracker */;
+			targetProxy = AABBAABBAABBAABBAABB006A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AABBAABBAABBAABBAABB0005 /* Debug */ = {
@@ -383,6 +487,42 @@
 			};
 			name = Release;
 		};
+		AABBAABBAABBAABBAABB0066 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tonybuckner.SubscriptionTrackerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SubscriptionTracker.app/SubscriptionTracker";
+			};
+			name = Debug;
+		};
+		AABBAABBAABBAABBAABB0067 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tonybuckner.SubscriptionTrackerTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SubscriptionTracker.app/SubscriptionTracker";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -400,6 +540,15 @@
 			buildConfigurations = (
 				AABBAABBAABBAABBAABB0007 /* Debug */,
 				AABBAABBAABBAABBAABB0008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AABBAABBAABBAABBAABB0068 /* Build configuration list for PBXNativeTarget "SubscriptionTrackerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABBAABBAABBAABBAABB0066 /* Debug */,
+				AABBAABBAABBAABBAABB0067 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
