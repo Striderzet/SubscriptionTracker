@@ -163,10 +163,17 @@ final class SubscriptionTrackerUITests: XCTestCase {
 
     func testSwipeToDeleteRemovesSubscriptionFromList() {
         addSubscription(name: "Peacock")
-        XCTAssertTrue(app.staticTexts["Peacock"].waitForExistence(timeout: 3))
 
-        app.cells.firstMatch.swipeLeft()
-        app.buttons["Delete"].tap()
+        // Swipe the named row directly — app.cells.firstMatch picks up the
+        // monthly/annual summary header (first cell in the list), which has
+        // no .onDelete action and never reveals a Delete button.
+        let subscriptionRow = app.staticTexts["Peacock"]
+        XCTAssertTrue(subscriptionRow.waitForExistence(timeout: 3))
+        subscriptionRow.swipeLeft()
+
+        let deleteButton = app.buttons["Delete"]
+        XCTAssertTrue(deleteButton.waitForExistence(timeout: 2))
+        deleteButton.tap()
 
         XCTAssertTrue(app.staticTexts["No Subscriptions"].waitForExistence(timeout: 3))
     }
