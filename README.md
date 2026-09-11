@@ -27,11 +27,9 @@ SubscriptionTracker gives users a single place to track every recurring subscrip
 
 ## Screenshots
 
-> Add screenshots or a demo GIF here before submission.
-
 | Subscriptions List | Summary | Add Subscription |
 |---|---|---|
-| *(screenshot)* | *(screenshot)* | *(screenshot)* |
+| ![Subscriptions List](Screenshots/subscriptions-list.png) | ![Summary](Screenshots/summary.png) | ![Add Subscription](Screenshots/add-subscription.png) |
 
 ---
 
