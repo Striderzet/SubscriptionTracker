@@ -53,7 +53,10 @@ final class SubscriptionListViewModelTests: XCTestCase {
     func testIconAndFormatConstants() {
         XCTAssertEqual(SubscriptionListViewModel.tabIcon, "creditcard.fill")
         XCTAssertEqual(SubscriptionListViewModel.iconAdd, "plus")
-        XCTAssertEqual(SubscriptionListViewModel.currencyCode, "USD")
+        // currencyCode is resolved from the device locale — assert it's a valid
+        // 3-character ISO 4217 code rather than pinning to "USD".
+        XCTAssertEqual(SubscriptionListViewModel.currencyCode.count, 3)
+        XCTAssertFalse(SubscriptionListViewModel.currencyCode.isEmpty)
         XCTAssertEqual(SubscriptionListViewModel.emptyStateIcon, "creditcard.fill")
     }
 

@@ -68,7 +68,7 @@ struct SubscriptionService: SubscriptionServicing {
         case ..<0: return String(localized: "renewal.overdue")
         case 0:    return String(localized: "renewal.today")
         case 1:    return String(localized: "renewal.tomorrow")
-        default:   return String(format: NSLocalizedString("renewal.in_days", comment: ""), subscription.daysUntilRenewal)
+        default:   return String(format: String(localized: "renewal.in_days"), subscription.daysUntilRenewal)
         }
     }
 

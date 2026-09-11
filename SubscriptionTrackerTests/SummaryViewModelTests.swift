@@ -50,7 +50,10 @@ final class SummaryViewModelTests: XCTestCase {
 
     func testIconAndFormatConstants() {
         XCTAssertEqual(SummaryViewModel.tabIcon, "chart.pie.fill")
-        XCTAssertEqual(SummaryViewModel.currencyCode, "USD")
+        // currencyCode is resolved from the device locale — assert it's a valid
+        // 3-character ISO 4217 code rather than pinning to "USD".
+        XCTAssertEqual(SummaryViewModel.currencyCode.count, 3)
+        XCTAssertFalse(SummaryViewModel.currencyCode.isEmpty)
         XCTAssertEqual(SummaryViewModel.emptyStateIcon, "chart.pie.fill")
     }
 

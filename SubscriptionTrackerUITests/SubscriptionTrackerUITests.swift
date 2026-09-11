@@ -21,15 +21,19 @@ final class SubscriptionTrackerUITests: XCTestCase {
         app.launch()
     }
 
+    override func tearDown() {
+        app.terminate()
+        super.tearDown()
+    }
+
     // MARK: - Helpers
 
     /// Fills the required fields and taps Save to create one subscription.
-    @discardableResult
     private func addSubscription(
         name: String = "Netflix",
         merchant: String = "Netflix, Inc.",
         amount: String = "15.99"
-    ) -> XCUIApplication {
+    ) {
         app.buttons["list.add"].tap()
 
         let nameField = app.textFields["Name (e.g. Netflix)"]
@@ -46,7 +50,6 @@ final class SubscriptionTrackerUITests: XCTestCase {
         amountField.typeText(amount)
 
         app.buttons["Save"].tap()
-        return app
     }
 
     // MARK: - Launch & Tab Navigation

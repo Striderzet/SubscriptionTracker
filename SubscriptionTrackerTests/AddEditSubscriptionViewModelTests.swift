@@ -23,7 +23,10 @@ final class AddEditSubscriptionViewModelTests: XCTestCase {
         XCTAssertEqual(AddEditSubscriptionViewModel.cardDigitsFieldWidth, 60)
         XCTAssertEqual(AddEditSubscriptionViewModel.maxCardDigits, 4)
         XCTAssertEqual(AddEditSubscriptionViewModel.amountFormat, "%.2f")
-        XCTAssertEqual(AddEditSubscriptionViewModel.currencyCode, "USD")
+        // currencyCode is resolved from the device locale — assert it's a valid
+        // 3-character ISO 4217 code rather than pinning to "USD".
+        XCTAssertEqual(AddEditSubscriptionViewModel.currencyCode.count, 3)
+        XCTAssertFalse(AddEditSubscriptionViewModel.currencyCode.isEmpty)
     }
 
     // MARK: - Default Form State
@@ -149,7 +152,9 @@ final class AddEditSubscriptionViewModelTests: XCTestCase {
 
         XCTAssertEqual(vm.name, "Spotify")
         XCTAssertEqual(vm.merchant, "Spotify AB")
-        XCTAssertEqual(vm.amountText, "9.99")
+        // amountText is locale-formatted — assert the parsed value, not the string,
+        // so the test passes on both dot- and comma-decimal locales.
+        XCTAssertEqual(vm.parsedAmount, 9.99, accuracy: 0.001)
         XCTAssertEqual(vm.billingCycle, .annual)
         XCTAssertEqual(vm.nextRenewal, renewal)
         XCTAssertEqual(vm.category, .streaming)

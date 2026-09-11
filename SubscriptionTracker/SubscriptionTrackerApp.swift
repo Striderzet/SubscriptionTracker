@@ -16,10 +16,18 @@ struct SubscriptionTrackerApp: App {
         // UI tests pass --uitesting to isolate each run in an in-memory store so
         // persistent data from a previous run never bleeds into the next test.
         let inMemory = CommandLine.arguments.contains("--uitesting")
-        container = try! ModelContainer(
-            for: Subscription.self,
-            configurations: ModelConfiguration(isStoredInMemoryOnly: inMemory)
-        )
+        do {
+            container = try ModelContainer(
+                for: Subscription.self,
+                configurations: ModelConfiguration(isStoredInMemoryOnly: inMemory)
+            )
+        } catch {
+            // A failed init means the on-disk store is corrupted or the OS denied
+            // access. fatalError is intentional here — there is no meaningful UI we
+            // can show without a working store, and the crash log will surface the
+            // underlying SQLite/OS error for diagnosis.
+            fatalError("SwiftData failed to initialize — store may be corrupted: \(error)")
+        }
     }
 
     var body: some Scene {

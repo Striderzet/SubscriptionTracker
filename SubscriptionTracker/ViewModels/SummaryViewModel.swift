@@ -57,7 +57,7 @@ final class SummaryViewModel: SummaryViewModelProtocol {
     static let tabIcon = "chart.pie.fill"
 
     // MARK: - Format
-    static let currencyCode = "USD"
+    static let currencyCode: String = Locale.current.currency?.identifier ?? "USD"
 
     // MARK: - Strings
     static let navigationTitle: LocalizedStringKey = "summary.navigation.title"

@@ -16,12 +16,14 @@ struct SummaryView: View {
     var body: some View {
         NavigationStack {
             List {
-                let monthly = viewModel.monthlyTotal(in: subscriptions)
-                Section {
-                    HStack(spacing: SummaryViewModel.tileDividerSpacing) {
-                        StatTile(label: SummaryViewModel.labelMonthly, amount: monthly)
-                        Divider().padding(.vertical, SummaryViewModel.tileVerticalPadding)
-                        StatTile(label: SummaryViewModel.labelAnnual, amount: viewModel.annualTotal(in: subscriptions))
+                if !subscriptions.isEmpty {
+                    let monthly = viewModel.monthlyTotal(in: subscriptions)
+                    Section {
+                        HStack(spacing: SummaryViewModel.tileDividerSpacing) {
+                            StatTile(label: SummaryViewModel.labelMonthly, amount: monthly)
+                            Divider().padding(.vertical, SummaryViewModel.tileVerticalPadding)
+                            StatTile(label: SummaryViewModel.labelAnnual, amount: viewModel.annualTotal(in: subscriptions))
+                        }
                     }
                 }
 

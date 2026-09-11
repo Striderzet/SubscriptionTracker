@@ -61,7 +61,7 @@ final class SubscriptionListViewModel: SubscriptionListViewModelProtocol {
     static let iconAdd = "plus"
 
     // MARK: - Format
-    static let currencyCode = "USD"
+    static let currencyCode: String = Locale.current.currency?.identifier ?? "USD"
 
     // MARK: - Strings
     static let navigationTitle: LocalizedStringKey = "list.navigation.title"

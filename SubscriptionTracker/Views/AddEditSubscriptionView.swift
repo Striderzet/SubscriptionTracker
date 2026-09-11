@@ -65,9 +65,9 @@ struct AddEditSubscriptionView: View {
                             .multilineTextAlignment(.trailing)
                             .frame(width: AddEditSubscriptionViewModel.cardDigitsFieldWidth)
                             .onChange(of: vm.cardLastFour) { _, new in
-                                if new.count > AddEditSubscriptionViewModel.maxCardDigits {
-                                    vm.cardLastFour = String(new.prefix(AddEditSubscriptionViewModel.maxCardDigits))
-                                }
+                                // Strip non-digits first, then enforce the 4-character cap.
+                                let digits = String(new.filter(\.isNumber).prefix(AddEditSubscriptionViewModel.maxCardDigits))
+                                if digits != new { vm.cardLastFour = digits }
                             }
                     }
                 }

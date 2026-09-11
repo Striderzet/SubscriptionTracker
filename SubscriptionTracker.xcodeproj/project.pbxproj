@@ -19,6 +19,7 @@
 		AABBAABBAABBAABBAABB0035 /* SummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0034 /* SummaryViewModel.swift */; };
 		AABBAABBAABBAABBAABB0042 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0041 /* Localizable.strings */; };
 		AABBAABBAABBAABBAABB0051 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0050 /* SubscriptionService.swift */; };
+		AABBAABBAABBAABBAABB00A1 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB00A0 /* PrivacyInfo.xcprivacy */; };
 		AABBAABBAABBAABBAABB0071 /* MockSubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0070 /* MockSubscriptionService.swift */; };
 		AABBAABBAABBAABBAABB0073 /* BillingCycleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0072 /* BillingCycleTests.swift */; };
 		AABBAABBAABBAABBAABB0075 /* SubscriptionCategoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0074 /* SubscriptionCategoryTests.swift */; };
@@ -44,6 +45,7 @@
 		AABBAABBAABBAABBAABB0034 /* SummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModel.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0040 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0050 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB00A0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0061 /* SubscriptionTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubscriptionTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AABBAABBAABBAABBAABB0070 /* MockSubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSubscriptionService.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB0072 /* BillingCycleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillingCycleTests.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				AABBAABBAABBAABBAABB000F /* Views */,
 				AABBAABBAABBAABBAABB0036 /* ViewModels */,
 				AABBAABBAABBAABBAABB0052 /* Services */,
+				AABBAABBAABBAABBAABB00A0 /* PrivacyInfo.xcprivacy */,
 				AABBAABBAABBAABBAABB0041 /* Localizable.strings */,
 				AABBAABBAABBAABBAABB0018 /* Assets.xcassets */,
 				AABBAABBAABBAABBAABB0011 /* Preview Content */,
@@ -319,6 +322,7 @@
 				AABBAABBAABBAABBAABB001F /* Assets.xcassets in Resources */,
 				AABBAABBAABBAABBAABB0020 /* Preview Assets.xcassets in Resources */,
 				AABBAABBAABBAABBAABB0042 /* Localizable.strings in Resources */,
+				AABBAABBAABBAABBAABB00A1 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

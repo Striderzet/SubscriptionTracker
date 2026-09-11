@@ -40,7 +40,21 @@ final class AddEditSubscriptionViewModel: AddEditSubscriptionViewModelProtocol {
     // MARK: - Business Constants
     static let maxCardDigits = 4
     static let amountFormat = "%.2f"
-    static let currencyCode = "USD"
+    /// Resolved at first use from the device locale so amounts are always
+    /// formatted and parsed in the user's currency, not hardcoded to USD.
+    static let currencyCode: String = Locale.current.currency?.identifier ?? "USD"
+
+    // MARK: - Amount Formatter
+    /// Locale-aware formatter shared across parsing and pre-fill so that both
+    /// directions use the same decimal separator (e.g. "," in German locale).
+    private static let amountFormatter: NumberFormatter = {
+        let f = NumberFormatter()
+        f.locale = .current
+        f.numberStyle = .decimal
+        f.minimumFractionDigits = 2
+        f.maximumFractionDigits = 2
+        return f
+    }()
 
     // MARK: - Navigation Strings
     static let titleNew: LocalizedStringKey = "form.title.new"
@@ -79,7 +93,11 @@ final class AddEditSubscriptionViewModel: AddEditSubscriptionViewModelProtocol {
     var isActive = true
 
     // MARK: - Computed
-    var parsedAmount: Double? { Double(amountText) }
+    /// Tries the locale-aware formatter first (handles "9,99" in comma-decimal locales),
+    /// then falls back to Swift's C-locale Double() so "9.99" always works regardless of locale.
+    var parsedAmount: Double? {
+        Self.amountFormatter.number(from: amountText)?.doubleValue ?? Double(amountText)
+    }
 
     var isValid: Bool { !name.isEmpty && !merchant.isEmpty && parsedAmount != nil }
 
@@ -103,7 +121,8 @@ final class AddEditSubscriptionViewModel: AddEditSubscriptionViewModelProtocol {
     func populate(from subscription: Subscription) {
         name = subscription.name
         merchant = subscription.merchant
-        amountText = String(format: Self.amountFormat, subscription.amount)
+        amountText = Self.amountFormatter.string(from: NSNumber(value: subscription.amount))
+            ?? String(format: Self.amountFormat, subscription.amount)
         billingCycle = subscription.billingCycle
         nextRenewal = subscription.nextRenewal
         category = subscription.category
