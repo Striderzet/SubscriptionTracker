@@ -10,6 +10,18 @@ import SwiftData
 
 @main
 struct SubscriptionTrackerApp: App {
+    let container: ModelContainer
+
+    init() {
+        // UI tests pass --uitesting to isolate each run in an in-memory store so
+        // persistent data from a previous run never bleeds into the next test.
+        let inMemory = CommandLine.arguments.contains("--uitesting")
+        container = try! ModelContainer(
+            for: Subscription.self,
+            configurations: ModelConfiguration(isStoredInMemoryOnly: inMemory)
+        )
+    }
+
     var body: some Scene {
         WindowGroup {
             TabView {
@@ -19,6 +31,6 @@ struct SubscriptionTrackerApp: App {
                     .tabItem { Label(SummaryViewModel.navigationTitle, systemImage: SummaryViewModel.tabIcon) }
             }
         }
-        .modelContainer(for: Subscription.self)
+        .modelContainer(container)
     }
 }

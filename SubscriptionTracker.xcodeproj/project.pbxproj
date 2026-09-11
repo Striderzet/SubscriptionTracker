@@ -27,6 +27,7 @@
 		AABBAABBAABBAABBAABB007B /* SubscriptionListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB007A /* SubscriptionListViewModelTests.swift */; };
 		AABBAABBAABBAABBAABB007D /* SummaryViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB007C /* SummaryViewModelTests.swift */; };
 		AABBAABBAABBAABBAABB007F /* AddEditSubscriptionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB007E /* AddEditSubscriptionViewModelTests.swift */; };
+		AABBAABBAABBAABBAABB0091 /* SubscriptionTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBAABBAABBAABBAABB0090 /* SubscriptionTrackerUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,10 +53,19 @@
 		AABBAABBAABBAABBAABB007A /* SubscriptionListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListViewModelTests.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB007C /* SummaryViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModelTests.swift; sourceTree = "<group>"; };
 		AABBAABBAABBAABBAABB007E /* AddEditSubscriptionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditSubscriptionViewModelTests.swift; sourceTree = "<group>"; };
+		AABBAABBAABBAABBAABB0081 /* SubscriptionTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubscriptionTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AABBAABBAABBAABBAABB0090 /* SubscriptionTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionTrackerUITests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXContainerItemProxy section */
 		AABBAABBAABBAABBAABB006A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AABBAABBAABBAABBAABB0001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AABBAABBAABBAABBAABB0002;
+			remoteInfo = SubscriptionTracker;
+		};
+		AABBAABBAABBAABBAABB008A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AABBAABBAABBAABBAABB0001 /* Project object */;
 			proxyType = 1;
@@ -90,6 +100,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AABBAABBAABBAABBAABB0084 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -98,6 +115,7 @@
 			children = (
 				AABBAABBAABBAABBAABB000D /* SubscriptionTracker */,
 				AABBAABBAABBAABBAABB0060 /* SubscriptionTrackerTests */,
+				AABBAABBAABBAABBAABB0080 /* SubscriptionTrackerUITests */,
 				AABBAABBAABBAABBAABB0010 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -148,8 +166,17 @@
 			children = (
 				AABBAABBAABBAABBAABB0012 /* SubscriptionTracker.app */,
 				AABBAABBAABBAABBAABB0061 /* SubscriptionTrackerTests.xctest */,
+				AABBAABBAABBAABBAABB0081 /* SubscriptionTrackerUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AABBAABBAABBAABBAABB0080 /* SubscriptionTrackerUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AABBAABBAABBAABBAABB0090 /* SubscriptionTrackerUITests.swift */,
+			);
+			path = SubscriptionTrackerUITests;
 			sourceTree = "<group>";
 		};
 		AABBAABBAABBAABBAABB0060 /* SubscriptionTrackerTests */ = {
@@ -223,6 +250,24 @@
 			productReference = AABBAABBAABBAABBAABB0061 /* SubscriptionTrackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		AABBAABBAABBAABBAABB0082 /* SubscriptionTrackerUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AABBAABBAABBAABBAABB0088 /* Build configuration list for PBXNativeTarget "SubscriptionTrackerUITests" */;
+			buildPhases = (
+				AABBAABBAABBAABBAABB0083 /* Sources */,
+				AABBAABBAABBAABBAABB0084 /* Frameworks */,
+				AABBAABBAABBAABBAABB0085 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AABBAABBAABBAABBAABB0089 /* PBXTargetDependency */,
+			);
+			name = SubscriptionTrackerUITests;
+			productName = SubscriptionTrackerUITests;
+			productReference = AABBAABBAABBAABBAABB0081 /* SubscriptionTrackerUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -237,6 +282,10 @@
 						CreatedOnToolsVersion = 16.0;
 					};
 					AABBAABBAABBAABBAABB0062 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = AABBAABBAABBAABBAABB0002;
+					};
+					AABBAABBAABBAABBAABB0082 = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = AABBAABBAABBAABBAABB0002;
 					};
@@ -257,6 +306,7 @@
 			targets = (
 				AABBAABBAABBAABBAABB0002 /* SubscriptionTracker */,
 				AABBAABBAABBAABBAABB0062 /* SubscriptionTrackerTests */,
+				AABBAABBAABBAABBAABB0082 /* SubscriptionTrackerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -273,6 +323,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AABBAABBAABBAABBAABB0065 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AABBAABBAABBAABBAABB0085 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -313,6 +370,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AABBAABBAABBAABBAABB0083 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABBAABBAABBAABBAABB0091 /* SubscriptionTrackerUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -320,6 +385,11 @@
 			isa = PBXTargetDependency;
 			target = AABBAABBAABBAABBAABB0002 /* SubscriptionTracker */;
 			targetProxy = AABBAABBAABBAABBAABB006A /* PBXContainerItemProxy */;
+		};
+		AABBAABBAABBAABBAABB0089 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AABBAABBAABBAABBAABB0002 /* SubscriptionTracker */;
+			targetProxy = AABBAABBAABBAABBAABB008A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -523,6 +593,40 @@
 			};
 			name = Release;
 		};
+		AABBAABBAABBAABBAABB0086 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tonybuckner.SubscriptionTrackerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = SubscriptionTracker;
+			};
+			name = Debug;
+		};
+		AABBAABBAABBAABBAABB0087 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.tonybuckner.SubscriptionTrackerUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = SubscriptionTracker;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -549,6 +653,15 @@
 			buildConfigurations = (
 				AABBAABBAABBAABBAABB0066 /* Debug */,
 				AABBAABBAABBAABBAABB0067 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AABBAABBAABBAABBAABB0088 /* Build configuration list for PBXNativeTarget "SubscriptionTrackerUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABBAABBAABBAABBAABB0086 /* Debug */,
+				AABBAABBAABBAABBAABB0087 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
