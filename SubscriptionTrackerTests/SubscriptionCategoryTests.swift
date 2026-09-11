@@ -13,7 +13,7 @@ final class SubscriptionCategoryTests: XCTestCase {
     // MARK: - allCases
 
     func testAllCasesCount() {
-        XCTAssertEqual(SubscriptionCategory.allCases.count, 6)
+        XCTAssertEqual(SubscriptionCategory.allCases.count, 7)
     }
 
     // MARK: - icon
@@ -35,6 +35,7 @@ final class SubscriptionCategoryTests: XCTestCase {
         XCTAssertEqual(SubscriptionCategory.fitness.icon, "figure.run")
         XCTAssertEqual(SubscriptionCategory.news.icon, "newspaper.fill")
         XCTAssertEqual(SubscriptionCategory.gaming.icon, "gamecontroller.fill")
+        XCTAssertEqual(SubscriptionCategory.education.icon, "graduationcap.fill")
         XCTAssertEqual(SubscriptionCategory.other.icon, "square.grid.2x2.fill")
     }
 
@@ -67,6 +68,7 @@ final class SubscriptionCategoryTests: XCTestCase {
         XCTAssertEqual(SubscriptionCategory.fitness.rawValue, "Fitness")
         XCTAssertEqual(SubscriptionCategory.news.rawValue, "News")
         XCTAssertEqual(SubscriptionCategory.gaming.rawValue, "Gaming")
+        XCTAssertEqual(SubscriptionCategory.education.rawValue, "Education")
         XCTAssertEqual(SubscriptionCategory.other.rawValue, "Other")
     }
 }

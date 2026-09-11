@@ -50,39 +50,43 @@ enum SubscriptionCategory: String, Codable, CaseIterable {
     case fitness = "Fitness"
     case news = "News"
     case gaming = "Gaming"
+    case education = "Education"
     case other = "Other"
 
     var icon: String {
         switch self {
-        case .streaming: "play.tv.fill"
-        case .software: "laptopcomputer"
-        case .fitness: "figure.run"
-        case .news: "newspaper.fill"
-        case .gaming: "gamecontroller.fill"
-        case .other: "square.grid.2x2.fill"
+        case .streaming:  "play.tv.fill"
+        case .software:   "laptopcomputer"
+        case .fitness:    "figure.run"
+        case .news:       "newspaper.fill"
+        case .gaming:     "gamecontroller.fill"
+        case .education:  "graduationcap.fill"
+        case .other:      "square.grid.2x2.fill"
         }
     }
 
     var color: Color {
         switch self {
-        case .streaming: .purple
-        case .software: .blue
-        case .fitness: .green
-        case .news: .orange
-        case .gaming: .red
-        case .other: .gray
+        case .streaming:  .purple
+        case .software:   .blue
+        case .fitness:    .green
+        case .news:       .orange
+        case .gaming:     .red
+        case .education:  .teal
+        case .other:      .gray
         }
     }
 
     /// See BillingCycle.localizedName for the rationale on semantic keys vs rawValue.
     var localizedName: String {
         switch self {
-        case .streaming: NSLocalizedString("category.streaming", comment: "")
-        case .software:  NSLocalizedString("category.software", comment: "")
-        case .fitness:   NSLocalizedString("category.fitness", comment: "")
-        case .news:      NSLocalizedString("category.news", comment: "")
-        case .gaming:    NSLocalizedString("category.gaming", comment: "")
-        case .other:     NSLocalizedString("category.other", comment: "")
+        case .streaming:  NSLocalizedString("category.streaming", comment: "")
+        case .software:   NSLocalizedString("category.software", comment: "")
+        case .fitness:    NSLocalizedString("category.fitness", comment: "")
+        case .news:       NSLocalizedString("category.news", comment: "")
+        case .gaming:     NSLocalizedString("category.gaming", comment: "")
+        case .education:  NSLocalizedString("category.education", comment: "")
+        case .other:      NSLocalizedString("category.other", comment: "")
         }
     }
 }
