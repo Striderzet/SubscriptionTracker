@@ -10,6 +10,9 @@ import SwiftData
 
 // MARK: - Protocol (ISP / DIP)
 
+/// The abstraction that ViewModels depend on for all subscription business operations.
+/// Declaring dependencies against this protocol (not the concrete type) means tests can
+/// inject a mock conformer without touching production code.
 protocol SubscriptionServicing {
     func active(in subscriptions: [Subscription]) -> [Subscription]
     func inactive(in subscriptions: [Subscription]) -> [Subscription]
@@ -25,6 +28,8 @@ protocol SubscriptionServicing {
 
 // MARK: - Concrete Implementation (SRP)
 
+/// Default SubscriptionServicing implementation. All shared business logic lives here
+/// so it is not duplicated across the List and Summary ViewModels.
 struct SubscriptionService: SubscriptionServicing {
 
     func active(in subscriptions: [Subscription]) -> [Subscription] {
@@ -44,12 +49,15 @@ struct SubscriptionService: SubscriptionServicing {
     }
 
     func categoryData(in subscriptions: [Subscription]) -> [(category: SubscriptionCategory, total: Double)] {
+        // Group active subscriptions by category, sum each group's monthly spend,
+        // then sort descending so the highest-spend category leads in the chart.
         Dictionary(grouping: active(in: subscriptions), by: \.category)
             .map { (category: $0.key, total: $0.value.reduce(0) { $0 + $1.monthlyEquivalent }) }
             .sorted { $0.total > $1.total }
     }
 
     func upcomingRenewals(in subscriptions: [Subscription], windowDays: Int) -> [Subscription] {
+        // >= 0 intentionally excludes overdue subscriptions (negative daysUntilRenewal).
         active(in: subscriptions)
             .filter { $0.daysUntilRenewal >= 0 && $0.daysUntilRenewal <= windowDays }
             .sorted { $0.daysUntilRenewal < $1.daysUntilRenewal }

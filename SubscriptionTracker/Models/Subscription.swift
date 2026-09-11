@@ -15,9 +15,15 @@ enum BillingCycle: String, Codable, CaseIterable {
     case annual = "Annual"
 
     // MARK: - Conversion Constants (OCP — single source of truth for all billing math)
+
+    /// Average weeks per month (52 weeks ÷ 12 months). Used to convert weekly
+    /// amounts into a monthly equivalent for consistent spending comparisons.
     static let weeksPerMonth: Double = 4.33
     static let monthsPerYear: Double = 12.0
 
+    /// Converts a billed amount to its monthly equivalent for any cycle.
+    /// All billing math flows through here — adding a new case (e.g. .quarterly)
+    /// only requires updating this one switch.
     func monthlyEquivalent(for amount: Double) -> Double {
         switch self {
         case .weekly:  amount * BillingCycle.weeksPerMonth
@@ -26,6 +32,9 @@ enum BillingCycle: String, Codable, CaseIterable {
         }
     }
 
+    /// Uses semantic localization keys (not rawValue) so that the raw value —
+    /// which SwiftData persists — is decoupled from the display string.
+    /// Changing the English label never requires a data migration.
     var localizedName: String {
         switch self {
         case .weekly:  NSLocalizedString("billing.weekly", comment: "")
@@ -65,6 +74,7 @@ enum SubscriptionCategory: String, Codable, CaseIterable {
         }
     }
 
+    /// See BillingCycle.localizedName for the rationale on semantic keys vs rawValue.
     var localizedName: String {
         switch self {
         case .streaming: NSLocalizedString("category.streaming", comment: "")
@@ -110,8 +120,11 @@ final class Subscription {
         self.createdAt = Date()
     }
 
+    /// Delegates to BillingCycle so the conversion formula has a single source of truth.
     var monthlyEquivalent: Double { billingCycle.monthlyEquivalent(for: amount) }
 
+    /// Strips the time component from both dates before diffing so that a renewal
+    /// set to 11:59 PM tonight still reads as "today" rather than "0 days away."
     var daysUntilRenewal: Int {
         let today = Calendar.current.startOfDay(for: Date())
         let renewal = Calendar.current.startOfDay(for: nextRenewal)

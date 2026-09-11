@@ -10,6 +10,8 @@ import SwiftData
 
 // MARK: - Protocol (ISP / DIP)
 
+/// The interface SubscriptionListView depends on. Declaring this protocol
+/// means a mock conformer can be injected for UI tests without SwiftData.
 protocol SubscriptionListViewModelProtocol: AnyObject {
     func active(in subscriptions: [Subscription]) -> [Subscription]
     func inactive(in subscriptions: [Subscription]) -> [Subscription]
@@ -29,6 +31,8 @@ final class SubscriptionListViewModel: SubscriptionListViewModelProtocol {
     // MARK: - Dependencies (DIP)
     private let service: any SubscriptionServicing
 
+    /// Accepts any SubscriptionServicing conformer. Production code uses the default
+    /// SubscriptionService(); tests can pass a mock to avoid SwiftData overhead.
     init(service: any SubscriptionServicing = SubscriptionService()) {
         self.service = service
     }
@@ -96,6 +100,8 @@ final class SubscriptionListViewModel: SubscriptionListViewModelProtocol {
         service.renewalText(for: subscription)
     }
 
+    /// Passes the VM's threshold constants to the service so that the service stays
+    /// threshold-agnostic and each ViewModel can define its own urgency window.
     func renewalColor(for subscription: Subscription) -> Color {
         service.renewalColor(
             for: subscription,

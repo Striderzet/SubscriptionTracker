@@ -10,6 +10,8 @@ import SwiftData
 
 // MARK: - Protocol (ISP / DIP)
 
+/// The interface SummaryView depends on. Declaring this protocol
+/// means a mock conformer can be injected for UI tests without SwiftData.
 protocol SummaryViewModelProtocol: AnyObject {
     func monthlyTotal(in subscriptions: [Subscription]) -> Double
     func annualTotal(in subscriptions: [Subscription]) -> Double
@@ -27,6 +29,8 @@ final class SummaryViewModel: SummaryViewModelProtocol {
     // MARK: - Dependencies (DIP)
     private let service: any SubscriptionServicing
 
+    /// Accepts any SubscriptionServicing conformer. Production code uses the default
+    /// SubscriptionService(); tests can pass a mock to avoid SwiftData overhead.
     init(service: any SubscriptionServicing = SubscriptionService()) {
         self.service = service
     }
@@ -67,6 +71,8 @@ final class SummaryViewModel: SummaryViewModelProtocol {
     static let sectionUpcoming: LocalizedStringKey = "summary.section.upcoming"
 
     // MARK: - Chart Accessibility Labels (runtime-localized)
+    /// Swift Charts' .value() API requires String, not LocalizedStringKey.
+    /// String(localized:) is used here so the label is still translated at runtime.
     static var chartLabelAmount: String { String(localized: "chart.label.amount") }
     static var chartLabelCategory: String { String(localized: "chart.label.category") }
 

@@ -18,6 +18,8 @@ struct AddEditSubscriptionView: View {
     init(subscription: Subscription? = nil) {
         self.subscription = subscription
         if let s = subscription {
+            // Pre-populate before wrapping in @State so the form renders with
+            // existing values on first appearance rather than showing defaults.
             let vm = AddEditSubscriptionViewModel()
             vm.populate(from: s)
             self._viewModel = State(initialValue: vm)
@@ -25,6 +27,9 @@ struct AddEditSubscriptionView: View {
     }
 
     var body: some View {
+        // @Bindable is declared inside body (not as a stored property) because
+        // @Observable classes don't need @StateObject / @ObservedObject wrappers.
+        // This local binding lets SwiftUI track changes to vm's properties directly.
         @Bindable var vm = viewModel
         NavigationStack {
             Form {

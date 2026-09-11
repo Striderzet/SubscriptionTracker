@@ -10,6 +10,9 @@ import SwiftData
 
 // MARK: - Protocol (ISP / DIP)
 
+/// The interface AddEditSubscriptionView depends on.
+/// Mutable `get set` properties are declared here so the view can create
+/// @Bindable bindings against the protocol without knowing the concrete type.
 protocol AddEditSubscriptionViewModelProtocol: AnyObject {
     var name: String { get set }
     var merchant: String { get set }
@@ -80,17 +83,23 @@ final class AddEditSubscriptionViewModel: AddEditSubscriptionViewModelProtocol {
 
     var isValid: Bool { !name.isEmpty && !merchant.isEmpty && parsedAmount != nil }
 
-    // Delegates to BillingCycle — OCP: adding a new cycle only requires updating BillingCycle
+    /// Delegates to BillingCycle.monthlyEquivalent so the conversion formula
+    /// is not duplicated between this ViewModel and the Subscription model.
     var monthlyPreview: Double? {
         guard let amount = parsedAmount else { return nil }
         return billingCycle.monthlyEquivalent(for: amount)
     }
 
+    /// Always derived from monthlyPreview so the two values stay in sync and
+    /// the view never performs business math inline.
     var annualPreview: Double? {
         monthlyPreview.map { $0 * BillingCycle.monthsPerYear }
     }
 
     // MARK: - Methods
+
+    /// Copies an existing Subscription's values into the form state so the
+    /// fields are pre-filled when the sheet opens in edit mode.
     func populate(from subscription: Subscription) {
         name = subscription.name
         merchant = subscription.merchant
