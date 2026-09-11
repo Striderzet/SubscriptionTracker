@@ -154,7 +154,7 @@ final class AddEditSubscriptionViewModelTests: XCTestCase {
         XCTAssertEqual(vm.merchant, "Spotify AB")
         // amountText is locale-formatted — assert the parsed value, not the string,
         // so the test passes on both dot- and comma-decimal locales.
-        XCTAssertEqual(vm.parsedAmount, 9.99, accuracy: 0.001)
+        XCTAssertEqual(try XCTUnwrap(vm.parsedAmount), 9.99, accuracy: 0.001)
         XCTAssertEqual(vm.billingCycle, .annual)
         XCTAssertEqual(vm.nextRenewal, renewal)
         XCTAssertEqual(vm.category, .streaming)
