@@ -73,6 +73,8 @@ final class SubscriptionListViewModel: SubscriptionListViewModelProtocol {
     static let emptyStateIcon = "creditcard.fill"
     static let sectionActive: LocalizedStringKey = "list.section.active"
     static let sectionInactive: LocalizedStringKey = "list.section.inactive"
+    static let addButtonLabel = "Add"
+    static let addButtonIdentifier = "list.add"
 
     // MARK: - Data (delegated to service — SRP)
     func active(in subscriptions: [Subscription]) -> [Subscription] {

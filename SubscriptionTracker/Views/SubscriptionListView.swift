@@ -71,8 +71,8 @@ struct SubscriptionListView: View {
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button { showingAddSheet = true } label: { Image(systemName: SubscriptionListViewModel.iconAdd) }
-                        .accessibilityLabel("Add")
-                        .accessibilityIdentifier("list.add")
+                        .accessibilityLabel(SubscriptionListViewModel.addButtonLabel)
+                        .accessibilityIdentifier(SubscriptionListViewModel.addButtonIdentifier)
                 }
             }
             .overlay {
